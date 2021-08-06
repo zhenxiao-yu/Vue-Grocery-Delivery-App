@@ -1,9 +1,21 @@
 <template>
   <div class="dock">
-    <span class="docker__item">Home</span>
-    <span class="docker__item">Cart</span>
-    <span class="docker__item">Order</span>
-    <span class="docker__item">Profile</span>
+    <span class="dock__item"
+      ><div class="iconfont">&#xe6b8;</div>
+      <div class="dock__title">Home</div>
+    </span>
+    <span class="dock__item"
+      ><div class="iconfont">&#xe6af;</div>
+      <div class="dock__title">Cart</div>
+    </span>
+    <span class="dock__item"
+      ><div class="iconfont">&#xe699;</div>
+      <div class="dock__title">Orders</div>
+    </span>
+    <span class="dock__item">
+      <div class="iconfont">&#xe736;</div>
+      <div class="dock__title">Profile</div>
+    </span>
   </div>
 </template>
 
@@ -19,8 +31,19 @@
   height: 0.49rem;
   border-top: 1px solid #f1f1f1;
 }
-.docker__item {
+
+.dock__item {
   flex: 1;
   text-align: center;
+  .iconfont {
+    margin: 0.07rem 0 0.02rem 0;
+    font-size: 0.18rem;
+  }
+}
+
+.dock__title{
+  font-size: 20px;
+  transform: scale(0.5, 0.5);
+  transform-origin: center top;
 }
 </style>
