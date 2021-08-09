@@ -1,0 +1,8 @@
+@mixin ellipsis {
+  //hide long addresses
+  overflow: hidden;
+  //remain one line
+  white-space: nowrap;
+  //show '...' when address gets too long
+  text-overflow: ellipsis;
+}

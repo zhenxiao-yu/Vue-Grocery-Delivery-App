@@ -4,7 +4,7 @@
       <!-- address bar -->
       <div class="address">
         <span class="iconfont address__icon">&#xe651;</span>
-        400 Eastcastle Place, London, ONddddddddddddddddddddddddddddddddddddd
+        400 Eastcastle Place, London, ON
         <span class="iconfont address__notice">&#xe70a;</span>
       </div>
     </div>
@@ -30,6 +30,10 @@
 </template>
 
 <style lang="scss">
+//import predefined scss files
+@import './style/variables.scss';
+@import './style/mixins.scss';
+
 .wrapper {
   position: absolute;
   left: 0;
@@ -40,16 +44,11 @@
 }
 
 .address {
-  //hide long addresses
-  overflow: hidden;
   position: relative;
   padding: 0.16rem 0.24rem 0.16rem 0;
   line-height: 0.22rem;
   font-size: 0.16rem;
-  //remain one line
-  white-space: nowrap;
-  //show '...' when address gets too long
-  text-overflow: ellipsis;
+  @include ellipsis;
   .address__icon {
     position: relative;
     top: 0.01rem;
@@ -61,6 +60,7 @@
     top: 0.17rem;
     font-size: 0.2rem;
   }
+  color: $content-font-color;
 }
 
 .dock {
@@ -74,6 +74,7 @@
   //total dock height = 0.5rem
   height: 0.49rem;
   border-top: 0.01 solid #f1f1f1;
+  color: $content-font-color;
   //navigation element
   &__nav_elem {
     flex: 1;
