@@ -1,20 +1,20 @@
 <template>
   <div class="dock">
-    <span class="dock__item"
-      ><div class="iconfont">&#xe6b8;</div>
-      <div class="dock__title">Home</div>
+    <span class="dock__nav_elem dock__nav_elem--active"
+      ><div class="iconfont">&#xe6bb;</div>
+      <div class="dock__label">Home</div>
     </span>
-    <span class="dock__item"
-      ><div class="iconfont">&#xe6af;</div>
-      <div class="dock__title">Cart</div>
+    <span class="dock__nav_elem"
+      ><div class="iconfont">&#xe6b9;</div>
+      <div class="dock__label">Cart</div>
     </span>
-    <span class="dock__item"
-      ><div class="iconfont">&#xe699;</div>
-      <div class="dock__title">Orders</div>
+    <span class="dock__nav_elem"
+      ><div class="iconfont">&#xe7ab;</div>
+      <div class="dock__label">Orders</div>
     </span>
-    <span class="dock__item">
-      <div class="iconfont">&#xe736;</div>
-      <div class="dock__title">Profile</div>
+    <span class="dock__nav_elem">
+      <div class="iconfont">&#xe77a;</div>
+      <div class="dock__label">Profile</div>
     </span>
   </div>
 </template>
@@ -30,20 +30,26 @@
   width: 100%;
   height: 0.49rem;
   border-top: 1px solid #f1f1f1;
-}
-
-.dock__item {
-  flex: 1;
-  text-align: center;
-  .iconfont {
-    margin: 0.07rem 0 0.02rem 0;
-    font-size: 0.18rem;
+  //navigation element
+  &__nav_elem {
+    flex: 1;
+    text-align: center;
+    .iconfont {
+      font-size: 0.18rem;
+      margin: 0.07rem 0 0.02rem 0;
+    }
+    //active navigation element
+    &--active {
+      color: #ff3366;
+      background-color: #f7f7ff;
+    }
+  }
+  //navigation label
+  &__label {
+    font-size: 20px;
+    transform: scale(0.5, 0.5);
+    transform-origin: center top;
   }
 }
 
-.dock__title{
-  font-size: 20px;
-  transform: scale(0.5, 0.5);
-  transform-origin: center top;
-}
 </style>
