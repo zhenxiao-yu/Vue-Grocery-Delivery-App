@@ -4,7 +4,7 @@
       <!-- address bar -->
       <div class="address">
         <span class="iconfont address__icon">&#xe651;</span>
-        400 Eastcastle Place, London, ON
+        400 Eastcastle Place, London, ONddddddddddddddddddddddddddddddddddddd
         <span class="iconfont address__notice">&#xe70a;</span>
       </div>
     </div>
@@ -40,10 +40,16 @@
 }
 
 .address {
+  //hide long addresses
+  overflow: hidden;
   position: relative;
-  padding: 0.16rem 0;
+  padding: 0.16rem 0.24rem 0.16rem 0;
   line-height: 0.22rem;
   font-size: 0.16rem;
+  //remain one line
+  white-space: nowrap;
+  //show '...' when address gets too long
+  text-overflow: ellipsis;
   .address__icon {
     position: relative;
     top: 0.01rem;
