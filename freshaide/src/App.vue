@@ -17,11 +17,46 @@
         <img class="banner__image" src="./images/banner.jpg" />
       </div>
       <!-- category icons -->
-      <div class="categories">
+      <div class="cate">
         <!-- icon 1 -->
         <div class="cate__item">
-          <img class="cate__item__icon" />
-          <p class="cate__item__label"></p>
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">Condiments</p>
+        </div>
+        <!-- icon 2 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">Dairy</p>
+        </div>
+        <!-- icon 3 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">Beverages</p>
+        </div>
+        <!-- icon 4 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">School</p>
+        </div>
+        <!-- icon 5 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">Meat</p>
+        </div>
+        <!-- icon 6 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">Cleaning</p>
+        </div>
+        <!-- icon 7 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">Frozen</p>
+        </div>
+        <!-- icon 8 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
+          <p class="cate__item__label">Other</p>
         </div>
       </div>
     </div>
@@ -109,6 +144,26 @@
   &__image{
     width: 100%;
     border-radius: 0.05rem;
+  }
+}
+
+.cate{
+  display: flex;
+  flex-wrap: wrap;
+  &__item{
+    width: 25%;
+    &__icon{
+      display: block;
+      width: 0.4rem;
+      height:0.4rem;
+      //center
+      margin: 0 auto;
+    }
+    &__label{
+      text-align: center;
+      margin: 0.06rem 0 0.16rem 0;
+      font-family: $content-font;
+    }
   }
 }
 
