@@ -20,44 +20,47 @@
       <div class="cate">
         <!-- icon 1 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">Condiments</p>
+          <img class="cate__item__icon" src="./images/Snacks.png"/>
+          <p class="cate__item__label">Snacks</p>
         </div>
         <!-- icon 2 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">Dairy</p>
+          <img class="cate__item__icon" src="./images/Pantry.png"/>
+          <p class="cate__item__label">Pantry</p>
         </div>
         <!-- icon 3 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">Beverages</p>
+          <img class="cate__item__icon" src="./images/Meat.png"/>
+          <p class="cate__item__label">Meat</p>
         </div>
         <!-- icon 4 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">School</p>
+          <img class="cate__item__icon" src="./images/Study.png"/>
+          <p class="cate__item__label">School Supplies</p>
         </div>
         <!-- icon 5 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">Meat</p>
+          <img class="cate__item__icon" src="./images/Health.png"/>
+          <p class="cate__item__label">Health</p>
         </div>
         <!-- icon 6 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">Cleaning</p>
+          <img class="cate__item__icon" src="./images/Fruit.png"/>
+          <p class="cate__item__label">Fruits</p>
         </div>
         <!-- icon 7 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">Frozen</p>
+          <img class="cate__item__icon" src="./images/Beverage.png"/>
+          <p class="cate__item__label">Drinks</p>
         </div>
         <!-- icon 8 -->
         <div class="cate__item">
-          <img class="cate__item__icon" src="http://www.dell-lee.com/imgs/vue3/菜市场.png"/>
-          <p class="cate__item__label">Other</p>
+          <img class="cate__item__icon" src="./images/Vegetable.png"/>
+          <p class="cate__item__label">Vegetables</p>
         </div>
+      </div>
+      <!-- divider -->
+      <div class="divide">
       </div>
     </div>
     <div class="dock">
@@ -120,7 +123,7 @@
   margin-bottom: 0.12rem;
   vertical-align: middle;
   line-height: 0.32rem;
-  background: #f7f7ff;
+  background: $content-bg-color;
   color: #577399;
   border-radius: 0.16rem;
   font-family: $content-font;
@@ -150,12 +153,13 @@
 .cate{
   display: flex;
   flex-wrap: wrap;
+  margin-top: .16rem;
   &__item{
     width: 25%;
     &__icon{
       display: block;
-      width: 0.4rem;
-      height:0.4rem;
+      width: 0.5rem;
+      height:0.5rem;
       //center
       margin: 0 auto;
     }
@@ -163,8 +167,15 @@
       text-align: center;
       margin: 0.06rem 0 0.16rem 0;
       font-family: $content-font;
+      color:$content-font-color;
     }
   }
+}
+
+.divide{
+  margin: 0 -.18rem;
+  height: .1rem;
+  background: $content-bg-color;
 }
 
 .dock {
@@ -177,7 +188,7 @@
   width: 100%;
   //total dock height = 0.5rem
   height: 0.49rem;
-  border-top: 0.01 solid #f1f1f1;
+  border-top: 0.01 solid $content-bg-color;
   color: $content-font-color;
   font-family: $content-font;
   //navigation element

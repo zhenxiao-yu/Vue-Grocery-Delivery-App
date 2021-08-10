@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconfont';  /* Project id 2726367 */
-  src: url('//at.alicdn.com/t/font_2726367_1gxtcv94mgd.woff2?t=1628552942696') format('woff2'),
-       url('//at.alicdn.com/t/font_2726367_1gxtcv94mgd.woff?t=1628552942696') format('woff'),
-       url('//at.alicdn.com/t/font_2726367_1gxtcv94mgd.ttf?t=1628552942696') format('truetype');
+  src: url('//at.alicdn.com/t/font_2726367_oe5j2332fd.woff2?t=1628564384355') format('woff2'),
+       url('//at.alicdn.com/t/font_2726367_oe5j2332fd.woff?t=1628564384355') format('woff'),
+       url('//at.alicdn.com/t/font_2726367_oe5j2332fd.ttf?t=1628564384355') format('truetype');
 }
-  
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 0.16rem;
