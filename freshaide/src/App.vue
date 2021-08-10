@@ -63,18 +63,89 @@
       <div class="divide"></div>
       <!-- near by stores -->
       <div class="closeby">
-        <h3 class="nearby__title">Stores Near Me</h3>
+        <h3 class="closeby__title">Stores Near Me</h3>
         <!-- store 1 -->
         <div class="closeby__item">
           <img class="closeby__item__image" src="./images/Walmart.png" />
           <div class="closeby__content">
-            <div class="closeby_content_title">Walmart</div>
-            <div class="closeby_content__tags">
-              <div class="closeby_content__tag">10000+ Items Sold This Month</div>
-              <div class="closeby_content__tag">$3.99 Delivery Fee</div>
-              <div class="closeby_content__tag">92% Satisfaction Rate</div>
+            <div class="closeby__content__title">Walmart</div>
+            <div class="closeby__content__tags">
+              <span class="closeby__content__tag">20000+ Items</span>
+              <span class="closeby__content__tag">$3.99 Delivery Fee</span>
             </div>
-            <p class="closeby_content__vip">70% Off Delivery Fee For VIP Members</p>
+            <p class="closeby__content__vip">
+              70% Off Delivery Fee For VIP Members
+            </p>
+          </div>
+        </div>
+        <!-- store 2 -->
+        <div class="closeby__item">
+          <img class="closeby__item__image" src="./images/Walmart.png" />
+          <div class="closeby__content">
+            <div class="closeby__content__title">Walmart</div>
+            <div class="closeby__content__tags">
+              <span class="closeby__content__tag">20000+ Items</span>
+              <span class="closeby__content__tag">$3.99 Delivery Fee</span>
+            </div>
+            <p class="closeby__content__vip">
+              70% Off Delivery Fee For VIP Members
+            </p>
+          </div>
+        </div>
+        <!-- store 2 -->
+        <div class="closeby__item">
+          <img class="closeby__item__image" src="./images/Walmart.png" />
+          <div class="closeby__content">
+            <div class="closeby__content__title">Walmart</div>
+            <div class="closeby__content__tags">
+              <span class="closeby__content__tag">20000+ Items</span>
+              <span class="closeby__content__tag">$3.99 Delivery Fee</span>
+            </div>
+            <p class="closeby__content__vip">
+              70% Off Delivery Fee For VIP Members
+            </p>
+          </div>
+        </div>
+        <!-- store 3 -->
+        <div class="closeby__item">
+          <img class="closeby__item__image" src="./images/Walmart.png" />
+          <div class="closeby__content">
+            <div class="closeby__content__title">Walmart</div>
+            <div class="closeby__content__tags">
+              <span class="closeby__content__tag">20000+ Items</span>
+              <span class="closeby__content__tag">$3.99 Delivery Fee</span>
+            </div>
+            <p class="closeby__content__vip">
+              70% Off Delivery Fee For VIP Members
+            </p>
+          </div>
+        </div>
+        <!-- store 4 -->
+        <div class="closeby__item">
+          <img class="closeby__item__image" src="./images/Walmart.png" />
+          <div class="closeby__content">
+            <div class="closeby__content__title">Walmart</div>
+            <div class="closeby__content__tags">
+              <span class="closeby__content__tag">20000+ Items</span>
+              <span class="closeby__content__tag">$3.99 Delivery Fee</span>
+            </div>
+            <p class="closeby__content__vip">
+              70% Off Delivery Fee For VIP Members
+            </p>
+          </div>
+        </div>
+        <!-- store 5 -->
+        <div class="closeby__item">
+          <img class="closeby__item__image" src="./images/Walmart.png" />
+          <div class="closeby__content">
+            <div class="closeby__content__title">Walmart</div>
+            <div class="closeby__content__tags">
+              <span class="closeby__content__tag">20000+ Items</span>
+              <span class="closeby__content__tag">$3.99 Delivery Fee</span>
+            </div>
+            <p class="closeby__content__vip">
+              70% Off Delivery Fee For VIP Members
+            </p>
           </div>
         </div>
       </div>
@@ -106,12 +177,13 @@
 @import "./style/mixins.scss";
 
 .wrapper {
+  overflow-y: auto;
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0.5rem;
   right: 0;
-  padding: 0 0.18rem;
+  padding: 0 0.18rem 0.2rem 0.18rem;
 }
 
 .address {
@@ -140,7 +212,7 @@
   vertical-align: middle;
   line-height: 0.32rem;
   background: $content-bg-color;
-  color: #577399;
+  color: $content-border-color;
   border-radius: 0.16rem;
   font-family: $content-font;
   .iconfont {
@@ -193,6 +265,53 @@
   height: 0.1rem;
   background: $content-bg-color;
   border-radius: 0 0 0.075rem 0.075rem;
+}
+
+.closeby {
+  &__title {
+    margin: 0.16rem 0 0.02rem 0;
+    font-size: .18rem;
+    font-weight: nromal;
+    font-family: $content-font;
+    color: $content-font-color;
+  }
+  &__item {
+    display: flex;
+    padding: 0.12rem;
+    &__image{
+      margin-right: 0.16rem;
+      height: 0.56rem;
+      width: 0.56rem;
+    }
+  }
+  &__content {
+    flex: 1;
+    padding-bottom: 0.12rem;
+    border-bottom: 1px solid $content-border-color;
+    &__title {
+      line-height: 0.22rem;
+      font-size: 0.16rem;
+      font-family: $content-font;
+      color: $content-font-color;
+    }
+    &__tags {
+      margin-top: 0.08rem;
+      line-height: 0.18rem;
+      font-size: 0.13rem;
+      font-family: $content-font;
+      color: $content-font-color;
+    }
+    &__tag{
+      margin-right: 0.16rem;
+    }
+    &__vip{
+      margin: 0.08rem 0 0 0;
+      line-height: 0.18rem;
+      font-size: 0.13rem;
+      color:#ff3366;
+      font-family: $content-font;
+    }
+  }
 }
 
 .dock {
