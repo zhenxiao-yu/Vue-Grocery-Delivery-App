@@ -12,6 +12,18 @@
         <span class="iconfont">&#xe7b4;</span>
         <span class="seach__label">What are you looking for?</span>
       </div>
+      <!-- banner -->
+      <div class="banner">
+        <img class="banner__image" src="./images/banner.jpg" />
+      </div>
+      <!-- category icons -->
+      <div class="categories">
+        <!-- icon 1 -->
+        <div class="cate__item">
+          <img class="cate__item__icon" />
+          <p class="cate__item__label"></p>
+        </div>
+      </div>
     </div>
     <div class="dock">
       <span class="dock__nav_elem dock__nav_elem--active"
@@ -87,6 +99,16 @@
   &__label{
     display: inline-block;
     font-size: 0.14rem;
+  }
+}
+
+.banner{
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 33.3%;
+  &__image{
+    width: 100%;
+    border-radius: 0.05rem;
   }
 }
 
