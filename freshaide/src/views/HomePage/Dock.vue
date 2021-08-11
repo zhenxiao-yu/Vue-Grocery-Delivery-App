@@ -1,27 +1,31 @@
 <template>
     <div class="dock">
-      <span class="dock__nav_elem dock__nav_elem--active"
-        ><div class="iconfont">&#xe7a7;</div>
-        <div class="dock__label">Home</div>
-      </span>
-      <span class="dock__nav_elem"
-        ><div class="iconfont">&#xe747;</div>
-        <div class="dock__label">Cart</div>
-      </span>
-      <span class="dock__nav_elem"
-        ><div class="iconfont">&#xe7b3;</div>
-        <div class="dock__label">Orders</div>
-      </span>
-      <span class="dock__nav_elem">
-        <div class="iconfont">&#xe7c9;</div>
-        <div class="dock__label">Profile</div>
+      <!-- index = navigation item number -->
+      <span
+        v-for="(item, index) in dockItemsList"
+        :class="{'dock__nav_elem': true, 'dock__nav_elem--active': index===0}"
+        class="dock__nav_elem"
+        :key="item.label"
+      >
+        <!-- v-html to convert &#xe7a7; code to html element -->
+        <div class="iconfont" v-html="item.icon"/>
+        <div class="dock__label">{{item.label}}</div>
       </span>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Dock'
+  name: 'Dock',
+  setup () {
+    const dockItemsList = [
+      { icon: '&#xe7a7;', label: 'Home' },
+      { icon: '&#xe747;', label: 'Cart' },
+      { icon: '&#xe7b3;', label: 'Orders' },
+      { icon: '&#xe7c9;', label: 'Profile' }
+    ]
+    return { dockItemsList }
+  }
 }
 </script>
 
