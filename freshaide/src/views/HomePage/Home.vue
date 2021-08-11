@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="wrapper">
       <!-- IndexPart Component-->
       <IndexPart />
@@ -7,8 +6,7 @@
       <Closeby />
     </div>
     <!-- Dock Compoenent -->
-      <Dock />
-  </div>
+    <Dock />
 </template>
 
 <script>
