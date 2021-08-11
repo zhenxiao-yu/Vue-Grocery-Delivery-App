@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 //import predefined scss files
 @import "../../style/variables.scss";
 @import "../../style/mixins.scss";

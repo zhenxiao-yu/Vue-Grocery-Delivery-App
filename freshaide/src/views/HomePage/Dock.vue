@@ -4,7 +4,6 @@
       <span
         v-for="(item, index) in dockItemsList"
         :class="{'dock__nav_elem': true, 'dock__nav_elem--active': index===0}"
-        class="dock__nav_elem"
         :key="item.label"
       >
         <!-- v-html to convert &#xe7a7; code to html element -->
@@ -29,7 +28,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 //import predefined scss files
 @import "../../style/variables.scss";
 
