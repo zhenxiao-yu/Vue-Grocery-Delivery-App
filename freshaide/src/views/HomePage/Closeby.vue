@@ -40,6 +40,24 @@ export default {
       img: require('../../images/Loblaws.png'),
       tags: ['12000+ Items', '$1.99 Delivery Fee'],
       vip: '40% Off Delivery Fee For VIP Members'
+    }, {
+      id: 3,
+      title: 'Loblaws',
+      img: require('../../images/Loblaws.png'),
+      tags: ['12000+ Items', '$1.99 Delivery Fee'],
+      vip: '40% Off Delivery Fee For VIP Members'
+    }, {
+      id: 4,
+      title: 'Loblaws',
+      img: require('../../images/Loblaws.png'),
+      tags: ['12000+ Items', '$1.99 Delivery Fee'],
+      vip: '40% Off Delivery Fee For VIP Members'
+    }, {
+      id: 2,
+      title: 'Loblaws',
+      img: require('../../images/Loblaws.png'),
+      tags: ['12000+ Items', '$1.99 Delivery Fee'],
+      vip: '40% Off Delivery Fee For VIP Members'
     }]
     return { closeByList }
   }

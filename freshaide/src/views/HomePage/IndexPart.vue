@@ -17,44 +17,13 @@
   <!-- category icons -->
   <div class="cate">
     <!-- icon 1 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Snacks.png" />
-      <p class="cate__item__label">Snacks</p>
-    </div>
-    <!-- icon 2 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Pantry.png" />
-      <p class="cate__item__label">Pantry</p>
-    </div>
-    <!-- icon 3 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Meat.png" />
-      <p class="cate__item__label">Meat</p>
-    </div>
-    <!-- icon 4 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Study.png" />
-      <p class="cate__item__label">School Supplies</p>
-    </div>
-    <!-- icon 5 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Health.png" />
-      <p class="cate__item__label">Health</p>
-    </div>
-    <!-- icon 6 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Fruit.png" />
-      <p class="cate__item__label">Fruits</p>
-    </div>
-    <!-- icon 7 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Beverage.png" />
-      <p class="cate__item__label">Drinks</p>
-    </div>
-    <!-- icon 8 -->
-    <div class="cate__item">
-      <img class="cate__item__icon" src="../../images/Vegetable.png" />
-      <p class="cate__item__label">Vegetables</p>
+    <div
+      class="cate__item"
+      v-for="item in categoryList"
+      :key="item.label"
+    >
+      <img class="cate__item__icon" :src="item.icon" />
+      <p class="cate__item__label">{{item.label}}</p>
     </div>
   </div>
   <!-- divider -->
@@ -63,7 +32,20 @@
 
 <script>
 export default {
-  name: 'IndexPart'
+  name: 'IndexPart',
+  setup () {
+    const categoryList = [
+      { icon: require('../../images/Snacks.png'), label: 'Sancks' },
+      { icon: require('../../images/Pantry.png'), label: 'Pantry' },
+      { icon: require('../../images/Meat.png'), label: 'Meat' },
+      { icon: require('../../images/Study.png'), label: 'School Supplies' },
+      { icon: require('../../images/Health.png'), label: 'Health' },
+      { icon: require('../../images/Fruit.png'), label: 'Fruits' },
+      { icon: require('../../images/Beverage.png'), label: 'Beverage' },
+      { icon: require('../../images/Vegetable.png'), label: 'Vegetables' }
+    ]
+    return { categoryList }
+  }
 }
 </script>
 
