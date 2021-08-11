@@ -56,7 +56,7 @@ export default {
     }
     //active navigation element
     &--active {
-      color: #ff3366;
+      color: $content-highlight-color;
     }
   }
   //navigation label

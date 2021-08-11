@@ -31,13 +31,13 @@ export default {
     const closeByList = [{
       id: 1,
       title: 'Walmart',
-      img: '../../images/Walmart.png',
+      img: require('../../images/Walmart.png'),
       tags: ['20000+ Items', '$3.99 Delivery Fee'],
       vip: '70% Off Delivery Fee For VIP Members'
     }, {
       id: 2,
       title: 'Loblaws',
-      img: '../../images/Loblaws.png',
+      img: require('../../images/Loblaws.png'),
       tags: ['12000+ Items', '$1.99 Delivery Fee'],
       vip: '40% Off Delivery Fee For VIP Members'
     }]
@@ -62,9 +62,12 @@ export default {
     display: flex;
     padding: 0.12rem;
     &__image {
-      margin-right: 0.16rem;
+      margin: 0.16rem 0.20rem 0 0;
+      top: 50%;
       height: 0.56rem;
       width: 0.56rem;
+      border-radius: 50%;
+      box-shadow: 0 0 0.015rem 0.015rem $content-highlight-color;
     }
   }
   &__content {
@@ -91,7 +94,7 @@ export default {
       margin: 0.08rem 0 0 0;
       line-height: 0.18rem;
       font-size: 0.13rem;
-      color: #ff3366;
+      color: $content-highlight-color;
       font-family: $content-font;
     }
   }
