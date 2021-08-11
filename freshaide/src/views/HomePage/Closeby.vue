@@ -3,87 +3,22 @@
   <div class="closeby">
     <h3 class="closeby__title">Stores Near Me</h3>
     <!-- store 1 -->
-    <div class="closeby__item">
-      <img class="closeby__item__image" src="../../images/Walmart.png" />
+    <div
+      class="closeby__item"
+      v-for="item in closeByList"
+      :key="item.id"
+    >
+      <img class="closeby__item__image" :src="item.img">
       <div class="closeby__content">
-        <div class="closeby__content__title">Walmart</div>
+        <div class="closeby__content__title">{{item.title}}</div>
         <div class="closeby__content__tags">
-          <span class="closeby__content__tag">20000+ Items</span>
-          <span class="closeby__content__tag">$3.99 Delivery Fee</span>
+          <span
+          class="closeby__content__tag"
+          v-for="(innerItem, innerIndex) in item.tags"
+          :key="innerIndex"
+          >{{innerItem}}</span>
         </div>
-        <p class="closeby__content__vip">
-          70% Off Delivery Fee For VIP Members
-        </p>
-      </div>
-    </div>
-    <!-- store 2 -->
-    <div class="closeby__item">
-      <img class="closeby__item__image" src="../../images/Walmart.png" />
-      <div class="closeby__content">
-        <div class="closeby__content__title">Walmart</div>
-        <div class="closeby__content__tags">
-          <span class="closeby__content__tag">20000+ Items</span>
-          <span class="closeby__content__tag">$3.99 Delivery Fee</span>
-        </div>
-        <p class="closeby__content__vip">
-          70% Off Delivery Fee For VIP Members
-        </p>
-      </div>
-    </div>
-    <!-- store 2 -->
-    <div class="closeby__item">
-      <img class="closeby__item__image" src="../../images/Walmart.png" />
-      <div class="closeby__content">
-        <div class="closeby__content__title">Walmart</div>
-        <div class="closeby__content__tags">
-          <span class="closeby__content__tag">20000+ Items</span>
-          <span class="closeby__content__tag">$3.99 Delivery Fee</span>
-        </div>
-        <p class="closeby__content__vip">
-          70% Off Delivery Fee For VIP Members
-        </p>
-      </div>
-    </div>
-    <!-- store 3 -->
-    <div class="closeby__item">
-      <img class="closeby__item__image" src="../../images/Walmart.png" />
-      <div class="closeby__content">
-        <div class="closeby__content__title">Walmart</div>
-        <div class="closeby__content__tags">
-          <span class="closeby__content__tag">20000+ Items</span>
-          <span class="closeby__content__tag">$3.99 Delivery Fee</span>
-        </div>
-        <p class="closeby__content__vip">
-          70% Off Delivery Fee For VIP Members
-        </p>
-      </div>
-    </div>
-    <!-- store 4 -->
-    <div class="closeby__item">
-      <img class="closeby__item__image" src="../../images/Walmart.png" />
-      <div class="closeby__content">
-        <div class="closeby__content__title">Walmart</div>
-        <div class="closeby__content__tags">
-          <span class="closeby__content__tag">20000+ Items</span>
-          <span class="closeby__content__tag">$3.99 Delivery Fee</span>
-        </div>
-        <p class="closeby__content__vip">
-          70% Off Delivery Fee For VIP Members
-        </p>
-      </div>
-    </div>
-    <!-- store 5 -->
-    <div class="closeby__item">
-      <img class="closeby__item__image" src="../../images/Walmart.png" />
-      <div class="closeby__content">
-        <div class="closeby__content__title">Walmart</div>
-        <div class="closeby__content__tags">
-          <span class="closeby__content__tag">20000+ Items</span>
-          <span class="closeby__content__tag">$3.99 Delivery Fee</span>
-        </div>
-        <p class="closeby__content__vip">
-          70% Off Delivery Fee For VIP Members
-        </p>
+        <p class="closeby__content__vip">{{item.vip}}</p>
       </div>
     </div>
   </div>
@@ -91,7 +26,23 @@
 
 <script>
 export default {
-  name: 'Closeby'
+  name: 'Closeby',
+  setup () {
+    const closeByList = [{
+      id: 1,
+      title: 'Walmart',
+      img: '../../images/Walmart.png',
+      tags: ['20000+ Items', '$3.99 Delivery Fee'],
+      vip: '70% Off Delivery Fee For VIP Members'
+    }, {
+      id: 2,
+      title: 'Loblaws',
+      img: '../../images/Loblaws.png',
+      tags: ['12000+ Items', '$1.99 Delivery Fee'],
+      vip: '40% Off Delivery Fee For VIP Members'
+    }]
+    return { closeByList }
+  }
 }
 </script>
 
