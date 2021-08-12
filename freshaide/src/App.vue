@@ -1,11 +1,11 @@
 <template>
-  <Home />
+  <Login />
 </template>
 
 <script>
-import Home from './views/HomePage/Home'
+import Login from './views/LoginPage/Login'
 export default {
   name: 'App',
-  components: { Home }
+  components: { Login }
 }
 </script>
