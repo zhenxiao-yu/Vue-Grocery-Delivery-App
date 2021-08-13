@@ -25,6 +25,7 @@ export default {
 @import "../../style/variables.scss";
 
 .wrapper{
+    // container element
     position: absolute;
     top: 50%;
     left: 0;
