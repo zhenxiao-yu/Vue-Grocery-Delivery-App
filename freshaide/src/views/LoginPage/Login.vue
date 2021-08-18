@@ -1,14 +1,14 @@
 <template>
   <div class="wrapper">
-    <img class="wrapper__img" src="../../images/Avatar.png"/>
+    <img class="wrapper__profile-img" src="../../images/Avatar.png"/>
     <div class="wrapper__input">
-      <input class="wrapper__input__content" placeholder="Phone Number" />
+      <input class="wrapper__input__form" placeholder="Phone Number" />
     </div>
     <div class="wrapper__input">
-      <input class="wrapper__input__content"  placeholder="Password" />
+      <input class="wrapper__input__form"  placeholder="Password" />
     </div>
-    <div class="wrapper__login-button">Submit</div>
-    <div class="wrapper__login-link">Register Now</div>
+    <div class="wrapper__submit">Submit</div>
+    <div class="wrapper__register">Register Now!</div>
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   left: 0;
   right: 0;
   transform: translateY(-50%);
-  &__img {
+  &__profile-img {
     display: block;
     margin: 0 auto .4rem auto;
     width: .99rem;
@@ -42,7 +42,7 @@ export default {
     border: 1px solid rgba(0,0,0,0.10);
     border-radius: 6px;
     border-radius: 6px;
-    &__content {
+    &__form {
       line-height: .48rem;
       border: none;
       outline: none;
@@ -56,7 +56,7 @@ export default {
       }
     }
   }
-  &__login-button {
+  &__submit {
     margin: .32rem .4rem .16rem .4rem;
     line-height: .48rem;
     background: #0091FF;
@@ -68,7 +68,7 @@ export default {
     text-align: center;
     font-family: $content-font;
   }
-  &__login-link {
+  &__register {
     text-align: center;
     font-size: .14rem;
     font-family: $content-font;
