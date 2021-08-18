@@ -1,17 +1,15 @@
 <template>
-    <div class="wrapper">
-        <img class="wrapper__avatar" src="../../images/Avatar.png">
-        <!-- input element 1 -->
-        <div class="wrapper__form">
-            <input class="wrapper__form__input" placeholder="Please Enter Username" />
-        </div>
-        <!-- input element 2 -->
-        <div class="wrapper__form">
-            <input class="wrapper__form__input" placeholder="Please Enter Password"/>
-        </div>
-        <div clsss="wrapper__login-button">Submit</div>
-        <div clsss="wrapper__login-link">Register</div>
+  <div class="wrapper">
+    <img class="wrapper__img" src="../../images/Avatar.png"/>
+    <div class="wrapper__input">
+      <input class="wrapper__input__content" placeholder="Phone Number" />
     </div>
+    <div class="wrapper__input">
+      <input class="wrapper__input__content"  placeholder="Password" />
+    </div>
+    <div class="wrapper__login-button">Submit</div>
+    <div class="wrapper__login-link">Register Now</div>
+  </div>
 </template>
 
 <script>
@@ -24,42 +22,41 @@ export default {
 //import predefined scss files
 @import "../../style/variables.scss";
 
-.wrapper{
-    // container element
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    &__avatar {
-        display: block;
-        margin: 0 auto 0.4rem auto;
-        width: 0.80rem;
-        height: 0.80rem;
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  &__img {
+    display: block;
+    margin: 0 auto .4rem auto;
+    width: .99rem;
+    height: .99rem;
+  }
+  &__input {
+    height: .48rem;
+    margin: 0 .4rem .16rem .4rem;
+    padding: 0 .16rem;
+    background: #F9F9F9;
+    border: 1px solid rgba(0,0,0,0.10);
+    border-radius: 6px;
+    border-radius: 6px;
+    &__content {
+      line-height: .48rem;
+      border: none;
+      outline: none;
+      width: 100%;
+      background: none;
+      font-size: .16rem;
+      font-family: $content-font;
+      color: #111;
+      &::placeholder {
+        color: $content-font-color;
+      }
     }
-    &__form {
-        height: 0.48rem;
-        margin: 0 0.4rem 0.16rem 0.4rem;
-        padding: 0 0.16rem;
-        background: $content-bg-color;
-        border: 1px solid rgba(0,0,0,0.10);
-        border-radius: 6px;
-        &__input{
-            color: $content-font-color;
-            font-family: $content-font;
-            font-weight: 500;
-            line-height: 0.48rem;
-            border: none;
-            outline: none;
-            width: 100%;
-            background: none;
-            font-size: 0.16rem;
-            &::placeholder {
-                color: rgba(0,0,0,0.25);
-            }
-        }
-    }
-    &__login-button {
+  }
+  &__login-button {
     margin: .32rem .4rem .16rem .4rem;
     line-height: .48rem;
     background: #0091FF;
@@ -69,10 +66,12 @@ export default {
     color: #fff;
     font-size: .16rem;
     text-align: center;
+    font-family: $content-font;
   }
   &__login-link {
     text-align: center;
     font-size: .14rem;
+    font-family: $content-font;
     color: $content-highlight-color;
   }
 }
