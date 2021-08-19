@@ -8,7 +8,7 @@
       <input class="wrapper__input__form"  placeholder="Password" />
     </div>
     <div class="wrapper__submit">Submit</div>
-    <div class="wrapper__register">New to freshaide? Register today</div>
+    <div class="wrapper__register">New to freshaide? Register today!</div>
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
     height: .48rem;
     margin: 0 .4rem .16rem .4rem;
     padding: 0 .16rem;
-    background: #F9F9F9;
+    background: $content-bg-color;
     border: 1px solid rgba(0,0,0,0.10);
     border-radius: 6px;
     border-radius: 6px;
@@ -48,7 +48,7 @@ export default {
       outline: none;
       width: 100%;
       background: none;
-      font-size: .16rem;
+      font-size: .15rem;
       font-family: $content-font;
       color: #111;
       &::placeholder {
@@ -63,14 +63,14 @@ export default {
     box-shadow: 0 .04rem .08rem 0 #ff33667e;
     border-radius: .04rem;
     border-radius: .04rem;
-    color: #fff;
-    font-size: .16rem;
+    color: $content-bg-color;
+    font-size: .15rem;
     text-align: center;
     font-family: $content-font;
   }
   &__register {
     text-align: center;
-    font-size: .14rem;
+    font-size: .13rem;
     font-family: $content-font;
     color: $content-border-color;
   }
