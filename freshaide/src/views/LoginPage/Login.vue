@@ -8,7 +8,7 @@
       <input class="wrapper__input__form"  placeholder="Password" />
     </div>
     <div class="wrapper__submit">Submit</div>
-    <div class="wrapper__register">Register Now!</div>
+    <div class="wrapper__register">New to freshaide? Register today</div>
   </div>
 </template>
 
@@ -59,8 +59,8 @@ export default {
   &__submit {
     margin: .32rem .4rem .16rem .4rem;
     line-height: .48rem;
-    background: #0091FF;
-    box-shadow: 0 .04rem .08rem 0 rgba(0,145,255,0.32);
+    background: $content-highlight-color;
+    box-shadow: 0 .04rem .08rem 0 #ff33667e;
     border-radius: .04rem;
     border-radius: .04rem;
     color: #fff;
@@ -72,7 +72,7 @@ export default {
     text-align: center;
     font-size: .14rem;
     font-family: $content-font;
-    color: $content-highlight-color;
+    color: $content-border-color;
   }
 }
 </style>
