@@ -19,8 +19,9 @@ const router = createRouter({
   routes
 })
 
+// login status check
 router.beforeEach((to, from, next) => {
-  const loggedIn = false
+  const loggedIn = localStorage.loggedIn
   if (loggedIn || to.name === 'Login') {
     next()
   } else {

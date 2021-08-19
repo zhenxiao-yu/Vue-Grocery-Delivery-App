@@ -7,14 +7,25 @@
     <div class="wrapper__input">
       <input class="wrapper__input__form"  placeholder="Password" />
     </div>
-    <div class="wrapper__submit">Submit</div>
+    <div class="wrapper__submit" @click="handleSubmit">Submit</div>
     <div class="wrapper__register">New to freshaide? Register today!</div>
   </div>
 </template>
 
 <script>
+// get router
+import { useRouter } from 'vue-router'
 export default {
-  name: 'Login'
+  name: 'Login',
+  setup () {
+    const myRouter = useRouter()
+    const handleSubmit = () => {
+      localStorage.loggedIn = true
+      // reroute to Home page automatically
+      myRouter.push({ name: 'Home' })
+    }
+    return { handleSubmit }
+  }
 }
 </script>
 
