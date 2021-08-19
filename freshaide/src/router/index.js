@@ -19,4 +19,15 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  const loggedIn = false
+  if (loggedIn || to.name === 'Login') {
+    next()
+  } else {
+    next({ name: 'Login' })
+  }
+  console.log(to, from)
+  next()
+})
+
 export default router
