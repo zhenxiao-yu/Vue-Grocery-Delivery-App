@@ -10,7 +10,18 @@ const routes = [
   }, {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    // execute before entering the page
+    beforeEnter (to, from, next) {
+      const loggedIn = localStorage.loggedIn
+      if (loggedIn) {
+        next({ name: 'Home' })
+      } else {
+        next()
+      }
+      console.log(to, from)
+      next()
+    }
   }
 ]
 
@@ -19,7 +30,7 @@ const router = createRouter({
   routes
 })
 
-// login status check
+// execute each time whe router switch to new page
 router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.loggedIn
   if (loggedIn || to.name === 'Login') {
