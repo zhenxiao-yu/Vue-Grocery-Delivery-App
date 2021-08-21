@@ -8,7 +8,7 @@
       <input class="wrapper__input__form"  placeholder="Password" />
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
-    <div class="wrapper__register">New to freshaide? Register today!</div>
+    <div class="wrapper__register">New to Freshaide? Register today!</div>
   </div>
 </template>
 

@@ -7,8 +7,11 @@
     <div class="wrapper__input">
       <input class="wrapper__input__form"  placeholder="Password" />
     </div>
-    <div class="wrapper__submit" @click="handleSubmit">Submit</div>
-    <div class="wrapper__register">New to freshaide? Register today!</div>
+    <div class="wrapper__input">
+      <input class="wrapper__input__form"  placeholder="Confirm Password" />
+    </div>
+    <div class="wrapper__register">Register</div>
+    <div class="wrapper__login" @click="handleLoginClick">Already a Member? Login Now!</div>
   </div>
 </template>
 
@@ -19,12 +22,10 @@ export default {
   name: 'Register',
   setup () {
     const myRouter = useRouter()
-    const handleSubmit = () => {
-      localStorage.loggedIn = true
-      // reroute to Home page automatically
-      myRouter.push({ name: 'Home' })
+    const handleLoginClick = () => {
+      myRouter.push({ name: 'Login' })
     }
-    return { handleSubmit }
+    return { handleLoginClick }
   }
 }
 </script>
@@ -67,7 +68,7 @@ export default {
       }
     }
   }
-  &__submit {
+  &__register {
     margin: .32rem .4rem .16rem .4rem;
     line-height: .48rem;
     background: $content-highlight-color;
@@ -79,7 +80,7 @@ export default {
     text-align: center;
     font-family: $content-font;
   }
-  &__register {
+  &__login {
     text-align: center;
     font-size: .13rem;
     font-family: $content-font;
