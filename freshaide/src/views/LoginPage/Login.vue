@@ -19,15 +19,24 @@
 <script>
 // get router
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 export default {
   name: 'Login',
   setup () {
     const myRouter = useRouter()
     // Sumbit form button function
     const handleSubmit = () => {
-      localStorage.loggedIn = true
-      // reroute to Home page automatically
-      myRouter.push({ name: 'Home' })
+      axios.post('https://www.fastmock.site/mock/ae8e9031947a302fed5f92425995aa19/jd/api/user/login', {
+        username: 'Admin',
+        password: '111111'
+      }).then(() => {
+        alert('Success')
+      }).catch(() => {
+        alert('Failed')
+      })
+      // localStorage.loggedIn = true
+      // Reroute to Home page
+      // myRouter.push({ name: 'Home' })
     }
     // Reroute to Register page
     const handleRegisterClick = () => {
