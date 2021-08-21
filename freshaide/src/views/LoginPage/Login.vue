@@ -2,13 +2,18 @@
   <div class="wrapper">
     <img class="wrapper__profile-img" src="../../images/Avatar.png"/>
     <div class="wrapper__input">
-      <input class="wrapper__input__form" placeholder="Phone Number" />
+      <input
+        class="wrapper__input__form"
+        placeholder="Username"
+        v-model="data.username"
+      />
     </div>
     <div class="wrapper__input">
        <input
         class="wrapper__input__form"
         placeholder="Password"
         type="password"
+        v-model="data.password"
         />
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
@@ -20,29 +25,36 @@
 // get router
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { reactive } from 'vue'
+
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
 export default {
   name: 'Login',
   setup () {
+    const data = reactive({
+      username: '',
+      password: ''
+    })
     const myRouter = useRouter()
     // Sumbit form button function
     const handleSubmit = () => {
       axios.post('https://www.fastmock.site/mock/ae8e9031947a302fed5f92425995aa19/jd/api/user/login', {
-        username: 'Admin',
-        password: '111111'
+        username: data.username,
+        password: data.password
       }).then(() => {
-        alert('Success')
+        localStorage.loggedIn = true
+        // Reroute to Home page
+        myRouter.push({ name: 'Home' })
       }).catch(() => {
-        alert('Failed')
+        alert('Login Failed')
       })
-      // localStorage.loggedIn = true
-      // Reroute to Home page
-      // myRouter.push({ name: 'Home' })
     }
     // Reroute to Register page
     const handleRegisterClick = () => {
       myRouter.push({ name: 'Register' })
     }
-    return { handleSubmit, handleRegisterClick }
+    return { handleSubmit, handleRegisterClick, data }
   }
 }
 </script>
