@@ -24,38 +24,39 @@
 <script>
 // get router
 import { useRouter } from 'vue-router'
-import 
+import { post } from '../../utils/req'
 import { reactive } from 'vue'
 
 export default {
   name: 'Login',
   setup () {
     const data = reactive({
+      // bibding data
       username: '',
       password: ''
     })
-    const myRouter = useRouter()
-    // Sumbit form button function
+    const router = useRouter()
+    // handle submit button
     const handleSubmit = async () => {
       try {
-        const result = await axios.post('/api/user/login', {
+        const returnData = await post('/api/user/login', {
           username: data.username,
           password: data.password
         })
-        if (result?.data?.errorno === 0) {
+        if (returnData?.errno === 0) {
+          // reroute to home page
           localStorage.loggedIn = true
-          // Reroute to Home page
-          myRouter.push({ name: 'Home' })
+          router.push({ name: 'Home' })
         } else {
           alert('Login failed')
         }
       } catch (e) {
-        alert('Request dailed')
+        alert('Request failed')
       }
     }
-    // Reroute to Register page
+    // handle reroute to login page
     const handleRegisterClick = () => {
-      myRouter.push({ name: 'Register' })
+      router.push({ name: 'Register' })
     }
     return { handleSubmit, handleRegisterClick, data }
   }
