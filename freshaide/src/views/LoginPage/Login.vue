@@ -5,10 +5,14 @@
       <input class="wrapper__input__form" placeholder="Phone Number" />
     </div>
     <div class="wrapper__input">
-      <input class="wrapper__input__form"  placeholder="Password" />
+       <input
+        class="wrapper__input__form"
+        placeholder="Password"
+        type="password"
+        />
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
-    <div class="wrapper__register">New to Freshaide? Register today!</div>
+    <div class="wrapper__register" @click="handleRegisterClick">New to Freshaide? Register today!</div>
   </div>
 </template>
 
@@ -19,12 +23,17 @@ export default {
   name: 'Login',
   setup () {
     const myRouter = useRouter()
+    // Sumbit form button function
     const handleSubmit = () => {
       localStorage.loggedIn = true
       // reroute to Home page automatically
       myRouter.push({ name: 'Home' })
     }
-    return { handleSubmit }
+    // Reroute to Register page
+    const handleRegisterClick = () => {
+      myRouter.push({ name: 'Register' })
+    }
+    return { handleSubmit, handleRegisterClick }
   }
 }
 </script>

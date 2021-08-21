@@ -5,10 +5,18 @@
       <input class="wrapper__input__form" placeholder="Phone Number" />
     </div>
     <div class="wrapper__input">
-      <input class="wrapper__input__form"  placeholder="Password" />
+       <input
+        class="wrapper__input__form"
+        placeholder="New Password"
+        type="password"
+        />
     </div>
     <div class="wrapper__input">
-      <input class="wrapper__input__form"  placeholder="Confirm Password" />
+      <input
+        class="wrapper__input__form"
+        placeholder="Confirm Password"
+        type="password"
+        />
     </div>
     <div class="wrapper__register">Register</div>
     <div class="wrapper__login" @click="handleLoginClick">Already a Member? Login Now!</div>

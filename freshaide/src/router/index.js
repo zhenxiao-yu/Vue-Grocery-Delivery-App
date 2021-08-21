@@ -14,7 +14,7 @@ const routes = [
     component: Login,
     // execute before entering the page
     beforeEnter (to, from, next) {
-      const { loggedIn } = localStorage.loggedIn
+      const { loggedIn } = localStorage
       loggedIn ? next({ name: 'Home' }) : next()
     }
   }, {
@@ -23,7 +23,7 @@ const routes = [
     component: Register,
     // execute before entering the page
     beforeEnter (to, from, next) {
-      const { loggedIn } = localStorage.loggedIn
+      const { loggedIn } = localStorage
       loggedIn ? next({ name: 'Home' }) : next()
     }
   }
