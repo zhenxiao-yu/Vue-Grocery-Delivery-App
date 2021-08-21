@@ -22,6 +22,21 @@ const routes = [
       console.log(to, from)
       next()
     }
+  }, {
+    path: '/register',
+    name: 'register',
+    component: Login,
+    // execute before entering the page
+    beforeEnter (to, from, next) {
+      const loggedIn = localStorage.loggedIn
+      if (loggedIn) {
+        next({ name: 'Home' })
+      } else {
+        next()
+      }
+      console.log(to, from)
+      next()
+    }
   }
 ]
 
