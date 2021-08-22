@@ -18,6 +18,7 @@
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
     <div class="wrapper__register" @click="handleRegisterClick">New to Freshaide? Register today!</div>
+    <Toast/>
   </div>
 </template>
 
@@ -26,10 +27,11 @@
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/req'
 import { reactive } from 'vue'
-import Popup from '../../components/Popup'
+import Toast from '../../components/Toast'
 
 export default {
   name: 'Login',
+  components: { Toast },
   setup () {
     const data = reactive({
       // bibding data
