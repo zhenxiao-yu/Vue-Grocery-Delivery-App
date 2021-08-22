@@ -18,38 +18,41 @@
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
     <div class="wrapper__register" @click="handleRegisterClick">New to Freshaide? Register today!</div>
-    <Toast v-if="data.showMessage" :content="data.messageContent"/>
+    <Toast v-if="toastData.showMessage" :content="toastData.messageContent"/>
   </div>
 </template>
 
 <script>
+import { reactive } from 'vue'
 // get router
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/req'
-import { reactive } from 'vue'
 import Toast from '../../components/Toast'
+
+const useToastEffect = () => {
+  const toastData = reactive({
+    showMessage: false,
+    MessageContent: ''
+  })
+  const displayToast = (message) => {
+    toastData.showMessage = true
+    toastData.messageContent = message
+    setTimeout(() => {
+      toastData.showMessage = false
+      toastData.messageContent = ''
+    }, 1500)
+  }
+  return { toastData, displayToast }
+}
 
 export default {
   name: 'Login',
   components: { Toast },
   setup () {
-    const data = reactive({
-      // bibding data
-      username: '',
-      password: '',
-      showMessage: false,
-      MessageContent: ''
-    })
     const router = useRouter()
-
-    const displayToast = (message) => {
-      data.showMessage = true
-      data.messageContent = message
-      setTimeout(() => {
-        data.showMessage = false
-        data.messageContent = ''
-      }, 1500)
-    }
+    // binding data
+    const data = reactive({ username: '', password: '' })
+    const { toastData, displayToast } = useToastEffect()
 
     // handle submit button
     const handleSubmit = async () => {
@@ -75,7 +78,7 @@ export default {
     const handleRegisterClick = () => {
       router.push({ name: 'Register' })
     }
-    return { handleSubmit, handleRegisterClick, data }
+    return { handleSubmit, handleRegisterClick, data, toastData }
   }
 }
 </script>
