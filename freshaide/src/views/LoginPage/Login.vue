@@ -26,6 +26,7 @@
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/req'
 import { reactive } from 'vue'
+import Popup from '../../components/Popup'
 
 export default {
   name: 'Login',
