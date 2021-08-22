@@ -18,7 +18,7 @@
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
     <div class="wrapper__register" @click="handleRegisterClick">New to Freshaide? Register today!</div>
-    <Toast/>
+    <Toast v-if="data.showMessage" :content="data.messageContent"/>
   </div>
 </template>
 
@@ -36,13 +36,25 @@ export default {
     const data = reactive({
       // bibding data
       username: '',
-      password: ''
+      password: '',
+      showMessage: false,
+      MessageContent: ''
     })
     const router = useRouter()
+
+    const displayToast = (message) => {
+      data.showMessage = true
+      data.messageContent = message
+      setTimeout(() => {
+        data.showMessage = false
+        data.messageContent = ''
+      }, 1500)
+    }
+
     // handle submit button
     const handleSubmit = async () => {
       try {
-        const returnData = await post('/api/user/login', {
+        const returnData = await post('11/api/user/login', {
           username: data.username,
           password: data.password
         })
@@ -51,10 +63,12 @@ export default {
           localStorage.loggedIn = true
           router.push({ name: 'Home' })
         } else {
-          alert('Login failed')
+          // execute when login fails
+          displayToast('Login Failed')
         }
       } catch (e) {
-        alert('Request failed')
+        // execute when request fails
+        displayToast('Request Failed')
       }
     }
     // handle reroute to login page
@@ -66,7 +80,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang= "scss" scoped>
 //import predefined scss files
 @import "../../style/variables.scss";
 
