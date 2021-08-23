@@ -27,23 +27,7 @@ import { reactive } from 'vue'
 // get router
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/req'
-import Toast from '../../components/Toast'
-
-const useToastEffect = () => {
-  const toastData = reactive({
-    showMessage: false,
-    MessageContent: ''
-  })
-  const displayToast = (message) => {
-    toastData.showMessage = true
-    toastData.messageContent = message
-    setTimeout(() => {
-      toastData.showMessage = false
-      toastData.messageContent = ''
-    }, 1500)
-  }
-  return { toastData, displayToast }
-}
+import Toast, { useToastEffect } from '../../components/Toast'
 
 export default {
   name: 'Login',
@@ -57,7 +41,7 @@ export default {
     // handle submit button
     const handleSubmit = async () => {
       try {
-        const returnData = await post('11/api/user/login', {
+        const returnData = await post('/api/user/login', {
           username: data.username,
           password: data.password
         })
