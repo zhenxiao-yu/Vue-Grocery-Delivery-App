@@ -51,7 +51,7 @@ const useRegisterEffect = (displayToast) => {
         confirmPassword: data.confirmPassword
       })
       if (result?.errno === 0) {
-        // password Validation
+        // password validation
         if (data.username === '') {
           displayToast('Username Empty!')
           return

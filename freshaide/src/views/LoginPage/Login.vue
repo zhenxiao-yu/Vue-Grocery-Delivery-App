@@ -41,7 +41,7 @@ const useLoginEffect = (displayToast) => {
         username: data.username,
         password: data.password
       })
-      // password Validation
+      // password validation
       if (returnData?.errno === 0) {
         if (data.username === '') {
           displayToast('Username Empty!')
