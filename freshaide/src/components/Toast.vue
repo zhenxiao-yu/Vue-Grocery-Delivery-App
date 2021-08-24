@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, toRefs } from 'vue'
 export default {
   props: ['content']
 }
@@ -11,7 +11,7 @@ export default {
 export const useToastEffect = () => {
   const toastData = reactive({
     showMessage: false,
-    MessageContent: ''
+    messageContent: ''
   })
   const displayToast = (message) => {
     toastData.showMessage = true
@@ -21,7 +21,8 @@ export const useToastEffect = () => {
       toastData.messageContent = ''
     }, 1500)
   }
-  return { toastData, displayToast }
+  const { showMessage, messageContent } = toRefs(toastData)
+  return { showMessage, messageContent, displayToast }
 }
 </script>
 
@@ -34,7 +35,8 @@ export const useToastEffect = () => {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 0.1rem;
+  padding: 0.15rem;
+  font-size: 0.14rem;
   font-family: $content-font;
   background: rgba(0, 0, 0, 0.35);
   border-radius: 0.04rem;

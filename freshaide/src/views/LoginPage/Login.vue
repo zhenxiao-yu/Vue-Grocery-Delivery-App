@@ -5,7 +5,7 @@
       <input
         class="wrapper__input__form"
         placeholder="Username"
-        v-model="data.username"
+        v-model="username"
       />
     </div>
     <div class="wrapper__input">
@@ -13,17 +13,17 @@
         class="wrapper__input__form"
         placeholder="Password"
         type="password"
-        v-model="data.password"
+        v-model="password"
         />
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
     <div class="wrapper__register" @click="handleRegisterClick">New to Freshaide? Register today!</div>
-    <Toast v-if="toastData.showMessage" :content="toastData.messageContent"/>
+    <Toast v-if="showMessage" :content="messageContent"/>
   </div>
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, toRefs } from 'vue'
 // get router
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/req'
@@ -36,12 +36,12 @@ export default {
     const router = useRouter()
     // binding data
     const data = reactive({ username: '', password: '' })
-    const { toastData, displayToast } = useToastEffect()
+    const { showMessage, messageContent, displayToast } = useToastEffect()
 
     // handle submit button
     const handleSubmit = async () => {
       try {
-        const returnData = await post('/api/user/login', {
+        const returnData = await post('11/api/user/login', {
           username: data.username,
           password: data.password
         })
@@ -62,7 +62,17 @@ export default {
     const handleRegisterClick = () => {
       router.push({ name: 'Register' })
     }
-    return { handleSubmit, handleRegisterClick, data, toastData }
+
+    const { username, password } = toRefs(data)
+
+    return {
+      username,
+      password,
+      showMessage,
+      messageContent,
+      handleSubmit,
+      handleRegisterClick
+    }
   }
 }
 </script>
