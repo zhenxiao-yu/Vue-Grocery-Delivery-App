@@ -47,10 +47,26 @@ const useRegisterEffect = (displayToast) => {
     try {
       const result = await post('/api/user/register', {
         username: data.username,
-        password: data.password
+        password: data.password,
+        confirmPassword: data.confirmPassword
       })
       if (result?.errno === 0) {
-        router.push({ name: 'Login' })
+        // password Validation
+        if (data.username === '') {
+          displayToast('Username Empty!')
+          return
+        } else if (data.password === '') {
+          displayToast('Password Empty!')
+          return
+        } else if (data.confirmPassword === '') {
+          displayToast('Confirm Password Empty!')
+          return
+        } else if (data.confirmPassword !== data.password) {
+          displayToast('Passwords Do Not Match!')
+          return
+        } else {
+          router.push({ name: 'Login' })
+        }
       } else {
         // execute when register fails
         displayToast('Register Failed')

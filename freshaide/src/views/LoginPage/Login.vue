@@ -41,10 +41,19 @@ const useLoginEffect = (displayToast) => {
         username: data.username,
         password: data.password
       })
+      // password Validation
       if (returnData?.errno === 0) {
-        // reroute to home page
-        localStorage.loggedIn = true
-        router.push({ name: 'Home' })
+        if (data.username === '') {
+          displayToast('Username Empty!')
+          return
+        } else if (data.password === '') {
+          displayToast('Password Empty!')
+          return
+        } else {
+          // reroute to home page
+          localStorage.loggedIn = true
+          router.push({ name: 'Home' })
+        }
       } else {
         // execute when login fails
         displayToast('Login Failed')
