@@ -29,41 +29,51 @@ import { useRouter } from 'vue-router'
 import { post } from '../../utils/req'
 import Toast, { useToastEffect } from '../../components/Toast'
 
+const useLoginEffect = (displayToast) => {
+  const router = useRouter()
+  // binding data
+  const data = reactive({ username: '', password: '' })
+  // handle submit button
+  const handleSubmit = async () => {
+    try {
+      const returnData = await post('/api/user/login', {
+        username: data.username,
+        password: data.password
+      })
+      if (returnData?.errno === 0) {
+        // reroute to home page
+        localStorage.loggedIn = true
+        router.push({ name: 'Home' })
+      } else {
+        // execute when login fails
+        displayToast('Login Failed')
+      }
+    } catch (e) {
+    // execute when request fails
+      displayToast('Request Failed')
+    }
+  }
+  const { username, password } = toRefs(data)
+  return { username, password, handleSubmit }
+}
+
+const useRegisterEffect = () => {
+  const router = useRouter()
+  // handle reroute to login page
+  const handleRegisterClick = () => {
+    router.push({ name: 'Register' })
+  }
+  return { handleRegisterClick }
+}
+
 export default {
   name: 'Login',
   components: { Toast },
+  // decribes the order code is executed in
   setup () {
-    const router = useRouter()
-    // binding data
-    const data = reactive({ username: '', password: '' })
     const { showMessage, messageContent, displayToast } = useToastEffect()
-
-    // handle submit button
-    const handleSubmit = async () => {
-      try {
-        const returnData = await post('11/api/user/login', {
-          username: data.username,
-          password: data.password
-        })
-        if (returnData?.errno === 0) {
-          // reroute to home page
-          localStorage.loggedIn = true
-          router.push({ name: 'Home' })
-        } else {
-          // execute when login fails
-          displayToast('Login Failed')
-        }
-      } catch (e) {
-        // execute when request fails
-        displayToast('Request Failed')
-      }
-    }
-    // handle reroute to login page
-    const handleRegisterClick = () => {
-      router.push({ name: 'Register' })
-    }
-
-    const { username, password } = toRefs(data)
+    const { username, password, handleSubmit } = useLoginEffect(displayToast)
+    const { handleRegisterClick } = useRegisterEffect()
 
     return {
       username,
