@@ -1,17 +1,22 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/HomePage/Home'
-import Login from '../views/LoginPage/Login'
-import Register from '../views/RegisterPage/Register'
+// import Home from '../views/HomePage/Home'
+// import Store from '../views/StoreDetailPage/Store'
+// import Login from '../views/LoginPage/Login'
+// import Register from '../views/RegisterPage/Register'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('../views/HomePage/Home')
+  }, {
+    path: '/store',
+    name: 'Store',
+    component: () => import('../views/StoreDetailPage/Store')
   }, {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: () => import('../views/LoginPage/Login'),
     // execute before entering the page
     beforeEnter (to, from, next) {
       const { loggedIn } = localStorage
@@ -20,7 +25,7 @@ const routes = [
   }, {
     path: '/register',
     name: 'Register',
-    component: Register,
+    component: () => import('../views/RegisterPage/Register'),
     // execute before entering the page
     beforeEnter (to, from, next) {
       const { loggedIn } = localStorage
