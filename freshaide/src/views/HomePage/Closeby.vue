@@ -5,18 +5,19 @@
     <!-- store 1 -->
     <div
       class="closeby__item"
-      v-for="item in closeByList"
+      v-for="item in closebyList"
       :key="item.id"
     >
-      <img class="closeby__item__image" :src="item.img">
+      <img :src="item.img" class="closeby__item__image">
       <div class="closeby__content">
-        <div class="closeby__content__title">{{item.title}}</div>
+        <div class="closeby__content__title">{{item.name}}</div>
         <div class="closeby__content__tags">
-          <span
-          class="closeby__content__tag"
-          v-for="(innerItem, innerIndex) in item.tags"
-          :key="innerIndex"
-          >{{innerItem}}</span>
+          <span class="closeby__content__tag">Sales: {{item.sales}}+ </span>
+          <span class="closeby__content__tag">${{item.deliveryFee}} delivery fee</span>
+        </div>
+        <div class="closeby__content__tags">
+          <span class="closeby__content__tag">{{item.distance}} km away </span>
+          <span class="closeby__content__tag">Google Rating: {{item.rating}} Stars</span>
         </div>
         <p class="closeby__content__vip">{{item.vip}}</p>
       </div>
@@ -25,43 +26,29 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { get } from '../../utils/req'
+
+const useClosebyListEffect = () => {
+  const closebyList = ref([])
+  const getClosebyList = async () => {
+    const returnData = await get('/api/shop/closeby-list')
+    if (returnData?.errno === 0 && returnData?.data?.length) {
+      closebyList.value = returnData.data
+    }
+  }
+  return { closebyList, getClosebyList }
+}
+
 export default {
   name: 'Closeby',
   setup () {
-    const closeByList = [{
-      id: 1,
-      title: 'Walmart',
-      img: require('../../images/Walmart.png'),
-      tags: ['20000+ Items', '$3.99 Delivery Fee'],
-      vip: '70% Off Delivery Fee For VIP Members'
-    }, {
-      id: 2,
-      title: 'Loblaws',
-      img: require('../../images/Loblaws.png'),
-      tags: ['12000+ Items', '$1.99 Delivery Fee'],
-      vip: '40% Off Delivery Fee For VIP Members'
-    }, {
-      id: 3,
-      title: 'Loblaws',
-      img: require('../../images/Loblaws.png'),
-      tags: ['12000+ Items', '$1.99 Delivery Fee'],
-      vip: '40% Off Delivery Fee For VIP Members'
-    }, {
-      id: 4,
-      title: 'Loblaws',
-      img: require('../../images/Loblaws.png'),
-      tags: ['12000+ Items', '$1.99 Delivery Fee'],
-      vip: '40% Off Delivery Fee For VIP Members'
-    }, {
-      id: 2,
-      title: 'Loblaws',
-      img: require('../../images/Loblaws.png'),
-      tags: ['12000+ Items', '$1.99 Delivery Fee'],
-      vip: '40% Off Delivery Fee For VIP Members'
-    }]
-    return { closeByList }
+    const { closebyList, getClosebyList } = useClosebyListEffect()
+    getClosebyList()
+    return { closebyList }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
