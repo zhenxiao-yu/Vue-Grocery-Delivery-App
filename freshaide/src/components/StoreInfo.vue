@@ -1,7 +1,9 @@
 <template>
     <div class="store">
       <img :src="item.img" class="store__image">
-      <div class="store__content">
+      <div class="store__content"
+        :class="{'store_content': true, 'store__content--bordered': hideBorder ? false: true}"
+      >
         <div class="store__content__title">{{item.name}}</div>
         <div class="store__content__tags">
           <span class="store__content__tag">Sales: {{item.sales}}+ </span>
@@ -19,7 +21,7 @@
 <script>
 export default {
   name: 'StoreInfo',
-  props: ['item']
+  props: ['item', 'hideBorder']
 }
 </script>
 
@@ -36,12 +38,14 @@ export default {
       height: 0.56rem;
       width: 0.56rem;
       border-radius: 50%;
-      box-shadow: 0 0 0.015rem 0.015rem $content-highlight-color;
+      box-shadow: 0 0 0.015rem 0.015rem $content-font-color;
     }
     &__content {
     flex: 1;
     padding-bottom: 0.12rem;
-    border-bottom: 1px solid $content-border-color;
+    &--bordered{
+        border-bottom: 1px solid $content-border-color;
+    }
     &__title {
       line-height: 0.22rem;
       font-size: 0.16rem;
@@ -50,7 +54,7 @@ export default {
     }
     &__tags {
       margin-top: 0.08rem;
-      line-height: 0.18rem;
+      line-height: 0.12rem;
       font-size: 0.13rem;
       font-family: $content-font;
       color: $content-font-color;
