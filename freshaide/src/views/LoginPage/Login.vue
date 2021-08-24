@@ -14,6 +14,7 @@
         placeholder="Password"
         type="password"
         v-model="password"
+        autocomplete="new-password"
         />
     </div>
     <div class="wrapper__submit" @click="handleSubmit">Submit</div>
