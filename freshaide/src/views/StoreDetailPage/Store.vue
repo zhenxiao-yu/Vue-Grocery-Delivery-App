@@ -14,6 +14,7 @@
        </div>
     </div>
     <StoreInfo :item="item" :hideBorder="true" v-if="item.img"/>
+    <Core />
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import { reactive, toRefs } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { get } from '../../utils/req'
 import StoreInfo from '../../components/StoreInfo'
+import Core from './Core'
 
 // get current store information
 const useStoreInfoEffect = () => {
@@ -48,7 +50,7 @@ const useReturnRouterEffect = () => {
 
 export default {
   name: 'Store',
-  components: { StoreInfo },
+  components: { StoreInfo, Core },
   setup () {
     const { item, getItemData } = useStoreInfoEffect()
     const handleReturnClick = useReturnRouterEffect()
