@@ -8,7 +8,7 @@
   <!-- search bar -->
   <div class="search">
     <span class="iconfont">&#xe7b4;</span>
-    <span class="seach__label">What are you looking for?</span>
+    <span class="search__label">What are you looking for?</span>
   </div>
   <!-- banner -->
   <div class="banner">
