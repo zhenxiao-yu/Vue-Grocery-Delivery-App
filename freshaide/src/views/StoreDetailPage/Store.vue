@@ -63,7 +63,6 @@ export default {
 <style lang="scss" scoped>
 //import predefined scss files
 @import "../../style/variables.scss";
-@import "../../style/mixins.scss";
 
 .wrapper {
   padding: 0 .18rem;
