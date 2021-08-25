@@ -13,32 +13,34 @@
         />
        </div>
     </div>
-    <StoreInfo :item="item" :hideBorder="true" />
+    <StoreInfo :item="data.item" :hideBorder="true" />
   </div>
 </template>
 
 <script>
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { get } from '../../utils/req'
 import StoreInfo from '../../components/StoreInfo'
 export default {
   name: 'Shop',
   components: { StoreInfo },
   setup () {
     const myRouter = useRouter()
-    const item = {
-      id: '3',
-      name: 'Sobeys',
-      img: 'https://cdn.worldvectorlogo.com/logos/sobeys.svg',
-      sales: 1089,
-      deliveryFee: 2.99,
-      distance: 1.6,
-      rating: 4.3,
-      vip: '100% Off Delivery Fee For VIP Members'
+    const data = reactive({ item: {} })
+    const getItemData = async () => {
+      const result = await get('/api/store/1')
+      if (result?.errno === 0 && result?.data) {
+        data.item = result.data
+      }
+      console.log(result)
     }
+    getItemData()
+
     const handleReturnClick = () => {
       myRouter.back()
     }
-    return { item, handleReturnClick }
+    return { data, handleReturnClick }
   }
 }
 </script>
