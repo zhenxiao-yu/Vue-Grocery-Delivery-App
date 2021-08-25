@@ -4,7 +4,7 @@
       <div
         class="search__return iconfont"
         @click="handleReturnClick"
-      >&#xe6f2;</div>
+      >&#xe743;</div>
        <div class="search__bar">
          <span class="search__bar__icon iconfont">&#xe7b4;</span>
          <input
@@ -18,11 +18,13 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
 import StoreInfo from '../../components/StoreInfo'
 export default {
   name: 'Shop',
   components: { StoreInfo },
   setup () {
+    const myRouter = useRouter()
     const item = {
       id: '3',
       name: 'Sobeys',
@@ -33,7 +35,10 @@ export default {
       rating: 4.3,
       vip: '100% Off Delivery Fee For VIP Members'
     }
-    return { item }
+    const handleReturnClick = () => {
+      myRouter.back()
+    }
+    return { item, handleReturnClick }
   }
 }
 </script>

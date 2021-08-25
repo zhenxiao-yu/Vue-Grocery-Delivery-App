@@ -2,7 +2,9 @@
   <!-- near by stores -->
   <div class="closeby">
     <h3 class="closeby__title">Stores Near Me</h3>
-    <StoreInfo v-for="item in closebyList" :key="item.id" :item="item"/>
+    <router-link to="/store" v-for="item in closebyList" :key="item.id">
+      <StoreInfo  :item="item"/>
+    </router-link>
   </div>
 </template>
 
@@ -44,6 +46,9 @@ export default {
     font-weight: nromal;
     font-family: $content-font;
     color: $content-font-color;
+  }
+  a {
+    text-decoration: none;
   }
 }
 </style>
