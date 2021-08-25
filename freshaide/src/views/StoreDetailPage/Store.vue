@@ -53,7 +53,7 @@ export default {
 }
 .search {
   display: flex;
-  margin: .2rem 0 .16rem 0;
+  margin: .14rem 0 .04rem 0;
   line-height: .32rem;
   &__return {
     width: .3rem;
