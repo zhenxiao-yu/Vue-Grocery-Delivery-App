@@ -2,7 +2,11 @@
   <!-- near by stores -->
   <div class="closeby">
     <h3 class="closeby__title">Stores Near Me</h3>
-    <router-link to="/store" v-for="item in closebyList" :key="item.id">
+    <router-link
+      v-for="item in closebyList"
+      :key="item.id"
+      :to="`/store/${item.id}`"
+    >
       <StoreInfo  :item="item"/>
     </router-link>
   </div>
