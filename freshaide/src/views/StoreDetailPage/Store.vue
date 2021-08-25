@@ -13,34 +13,47 @@
         />
        </div>
     </div>
-    <StoreInfo :item="data.item" :hideBorder="true" />
+    <StoreInfo :item="item" :hideBorder="true" v-if="item.img"/>
   </div>
 </template>
 
 <script>
-import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import { reactive, toRefs } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { get } from '../../utils/req'
 import StoreInfo from '../../components/StoreInfo'
+
+// get current store information
+const useStoreInfoEffect = () => {
+  // path info
+  const myRoute = useRoute()
+  const data = reactive({ item: {} })
+  const getItemData = async () => {
+    const result = await get(`/api/store/${myRoute.params.id}`)
+    if (result?.errno === 0 && result?.data) {
+      data.item = result.data
+    }
+  }
+  const { item } = toRefs(data)
+  return { item, getItemData }
+}
+
+const useReturnRouterEffect = () => {
+  const myRouter = useRouter()
+  const handleReturnClick = () => {
+    myRouter.back()
+  }
+  return handleReturnClick
+}
+
 export default {
-  name: 'Shop',
+  name: 'Store',
   components: { StoreInfo },
   setup () {
-    const myRouter = useRouter()
-    const data = reactive({ item: {} })
-    const getItemData = async () => {
-      const result = await get('/api/store/1')
-      if (result?.errno === 0 && result?.data) {
-        data.item = result.data
-      }
-      console.log(result)
-    }
+    const { item, getItemData } = useStoreInfoEffect()
+    const handleReturnClick = useReturnRouterEffect()
     getItemData()
-
-    const handleReturnClick = () => {
-      myRouter.back()
-    }
-    return { data, handleReturnClick }
+    return { item, handleReturnClick }
   }
 }
 </script>
