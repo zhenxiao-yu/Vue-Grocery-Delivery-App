@@ -27,8 +27,11 @@
                 </div>
                 <div class="product__count">
                     <span class="product__count__minus">-</span>
-                    0
-                    <span class="product__count__plus">+</span>
+                    {{cartList?.[storeId]?.[item.id]?.count || 0 }}
+                    <span
+                      class="product__count__plus"
+                      @click="() => {addItem(storeId, item.id, item)}"
+                      >+</span>
                 </div>
             </div>
         </div>
@@ -38,6 +41,7 @@
 <script>
 import { reactive, ref, toRefs, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import { get } from '../../utils/req'
 
 const types = [
@@ -85,12 +89,26 @@ const useCurrentListEffect = (currentTab) => {
   return { list }
 }
 
+// cart related method
+const useCartEffect = () => {
+  const store = useStore()
+  const { cartList } = toRefs(store.state)
+  const addItem = (storeId, productId, productInfo) => {
+    store.commit('addItemToCart', { storeId, productId, productInfo })
+    console.log(storeId, productId, productInfo)
+  }
+  return { cartList, addItem }
+}
+
 export default {
   name: 'Content',
   setup () {
+    const myRoute = useRoute()
+    const storeId = myRoute.params.id
     const { currentTab, handleTabClick } = useTabEffect()
     const { list } = useCurrentListEffect(currentTab)
-    return { types, currentTab, handleTabClick, list }
+    const { cartList, addItem } = useCartEffect()
+    return { types, currentTab, handleTabClick, list, cartList, storeId, addItem }
   }
 }
 </script>
