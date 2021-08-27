@@ -37,6 +37,7 @@ export default {
 <style lang="scss" scoped>
 //import predefined scss files
 @import "../../style/variables.scss";
+@import "../../style/mixins.scss";
 
 .core {
     display: flex;
@@ -72,6 +73,9 @@ export default {
         padding: 0.12rem 0;
         margin: 0 0.16rem;
         border-bottom: 1px solid $content-bg-color;
+        &__info {
+            overflow: hidden;
+        }
         &__img {
             width: 0.68 rem;
             height: 0.68rem;
@@ -83,6 +87,7 @@ export default {
             font-size: 0.14rem;
             font-family: $content-font;
             color: $content-font-color;
+            @include ellipsis;
         }
         &__sales {
             margin: 0.06rem 0;
