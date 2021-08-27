@@ -19,9 +19,24 @@ export default createStore({
     }
   },
   mutations: {
-    addItem (state, payload) {
+    changeCartItem (state, payload) {
       const { storeId, productId, productInfo } = payload
-      console.log(storeId, productId, productInfo)
+      let storeInfo = state.cartList[storeId]
+      if (!storeInfo) { storeInfo = {} }
+      let product = storeInfo[productId]
+      if (!product) {
+        // if item does not exist, set product info
+        product = productInfo
+        product.count = 0
+      }
+      // change item amount
+      product.count = product.count + payload.num
+      // limit delete item number (can't be negative)
+      if (product.count < 0) { product.count = 0 }
+      // limit add item number (can't be more than 99)
+      if (product.count > 99) { product.count = 99 }
+      storeInfo[productId] = product
+      state.cartList[storeId] = storeInfo
     }
   },
   actions: {
