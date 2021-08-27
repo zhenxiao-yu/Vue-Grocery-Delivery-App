@@ -18,71 +18,10 @@
                         <span class="product__item__origin">&#36;5,580 ea</span>
                     </p>
                 </div>
-            </div>
-            <div class="product__item">
-                <img class="product__item__img" src="https://www.alportsyndrome.org/wp-content/uploads/2015/11/Kidney-reverse.jpg" />
-                <div class="product__item__info">
-                    <h4 class="product__item__title">Donor's kidney</h4>
-                    <p class="product__item__sales"> Monthly Sales: 437+</p>
-                    <p class="product__item__price">
-                        <span class="product__item__cad">&#36;</span>4,999 ea
-                        <span class="product__item__origin">&#36;5,580 ea</span>
-                    </p>
-                </div>
-            </div>
-            <div class="product__item">
-                <img class="product__item__img" src="https://www.alportsyndrome.org/wp-content/uploads/2015/11/Kidney-reverse.jpg" />
-                <div class="product__item__info">
-                    <h4 class="product__item__title">Donor's kidney</h4>
-                    <p class="product__item__sales"> Monthly Sales: 437+</p>
-                    <p class="product__item__price">
-                        <span class="product__item__cad">&#36;</span>4,999 ea
-                        <span class="product__item__origin">&#36;5,580 ea</span>
-                    </p>
-                </div>
-            </div>
-            <div class="product__item">
-                <img class="product__item__img" src="https://www.alportsyndrome.org/wp-content/uploads/2015/11/Kidney-reverse.jpg" />
-                <div class="product__item__info">
-                    <h4 class="product__item__title">Donor's kidney</h4>
-                    <p class="product__item__sales"> Monthly Sales: 437+</p>
-                    <p class="product__item__price">
-                        <span class="product__item__cad">&#36;</span>4,999 ea
-                        <span class="product__item__origin">&#36;5,580 ea</span>
-                    </p>
-                </div>
-            </div>
-            <div class="product__item">
-                <img class="product__item__img" src="https://www.alportsyndrome.org/wp-content/uploads/2015/11/Kidney-reverse.jpg" />
-                <div class="product__item__info">
-                    <h4 class="product__item__title">Donor's kidney</h4>
-                    <p class="product__item__sales"> Monthly Sales: 437+</p>
-                    <p class="product__item__price">
-                        <span class="product__item__cad">&#36;</span>4,999 ea
-                        <span class="product__item__origin">&#36;5,580 ea</span>
-                    </p>
-                </div>
-            </div>
-            <div class="product__item">
-                <img class="product__item__img" src="https://www.alportsyndrome.org/wp-content/uploads/2015/11/Kidney-reverse.jpg" />
-                <div class="product__item__info">
-                    <h4 class="product__item__title">Donor's kidney</h4>
-                    <p class="product__item__sales"> Monthly Sales: 437+</p>
-                    <p class="product__item__price">
-                        <span class="product__item__cad">&#36;</span>4,999 ea
-                        <span class="product__item__origin">&#36;5,580 ea</span>
-                    </p>
-                </div>
-            </div>
-            <div class="product__item">
-                <img class="product__item__img" src="https://www.alportsyndrome.org/wp-content/uploads/2015/11/Kidney-reverse.jpg" />
-                <div class="product__item__info">
-                    <h4 class="product__item__title">Donor's kidney</h4>
-                    <p class="product__item__sales"> Monthly Sales: 437+</p>
-                    <p class="product__item__price">
-                        <span class="product__item__cad">&#36;</span>4,999 ea
-                        <span class="product__item__origin">&#36;5,580 ea</span>
-                    </p>
+                <div class="product__count">
+                    <span class="product__count__minus">-</span>
+                    0
+                    <span class="product__count__plus">+</span>
                 </div>
             </div>
         </div>
@@ -128,6 +67,7 @@ export default {
     overflow-y: scroll;
     flex: 1;
     &__item {
+        position: relative;
         display: flex;
         padding: 0.12rem 0;
         margin: 0 0.16rem;
@@ -167,6 +107,33 @@ export default {
             color: rgba(0, 0, 0, 0.35);
             text-decoration: line-through;
             margin-left: 0.06rem;
+        }
+        .product__count{
+            position: absolute;
+            right: 0;
+            bottom: 0.12rem;
+            font-family: $content-font;
+            color: $content-font-color;
+            &__minus, &__plus
+            {
+                display: inline-block;
+                width: 0.2rem;
+                height: 0.2rem;
+                line-height: 0.16rem;
+                border-radius: 50%;
+                font-size: 0.2rem;
+                text-align: center;
+            }
+            &__minus{
+                border: 0.01rem solid $content-highlight-color;
+                color: $content-highlight-color;
+                margin-right: 0.06rem;
+            }
+            &__plus {
+                background: $content-highlight-color;
+                color: $content-bg-color;
+                margin-left: 0.06rem;
+            }
         }
     }
 }
