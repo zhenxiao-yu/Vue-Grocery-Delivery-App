@@ -2,7 +2,7 @@
     <div class="core">
         <div class="type">
             <div
-                class="type__item"
+                :class="{'type__item': true, 'type__item--active': currentTab === item.tab}"
                 v-for="item in types"
                 :key="item.name"
                 @click="() => handleTypeClick(item.tab)"
@@ -84,7 +84,10 @@ export default {
       name: 'Snacks',
       tab: 'snacks'
     }]
-    const data = reactive({ coreList: [1, 2, 3] })
+    const data = reactive({
+      currentTab: types[0].tab,
+      coreList: []
+    })
     const getCoreData = async (tab) => {
       const result = await get('/api/store/1/products', { tab })
       if (result?.errno === 0 && result?.data?.length) {
@@ -93,11 +96,12 @@ export default {
     }
     const handleTypeClick = (tab) => {
       getCoreData(tab)
+      data.currentTab = tab
     }
     // show all product items
     getCoreData('all')
-    const { coreList } = toRefs(data)
-    return { coreList, types, handleTypeClick }
+    const { coreList, currentTab } = toRefs(data)
+    return { coreList, currentTab, types, handleTypeClick }
   }
 }
 </script>
