@@ -5,7 +5,7 @@
                 :class="{'type__item': true, 'type__item--active': currentTab === item.tab}"
                 v-for="item in types"
                 :key="item.name"
-                @click="() => handleTypeClick(item.tab)"
+                @click="() => handleTabClick(item.tab)"
             >
             {{item.name}}
             </div>
@@ -13,7 +13,7 @@
         <div class="product">
             <div
                 class="product__item"
-                v-for="item in coreList"
+                v-for="item in list"
                 :key="item.id"
             >
                 <img class="product__item__img" :src="item.img" />
@@ -36,72 +36,61 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
+import { reactive, ref, toRefs, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
 import { get } from '../../utils/req'
-export default {
-  name: 'Core',
-  setup () {
-    const types = [{
-      name: 'All Items',
-      tab: 'all'
-    }, {
-      name: 'Sales',
-      tab: 'sales'
-    }, {
-      name: 'Fruits',
-      tab: 'fruits'
-    }, {
-      name: 'Deli',
-      tab: 'deli'
-    }, {
-      name: 'Bakery',
-      tab: 'bakery'
-    }, {
-      name: 'Dairy',
-      tab: 'dairy'
-    }, {
-      name: 'Meat',
-      tab: 'meat'
-    }, {
-      name: 'Vegetables',
-      tab: 'vegetables'
-    }, {
-      name: 'Seafood',
-      tab: 'seafood'
-    }, {
-      name: 'Pantry',
-      tab: 'pantry'
-    }, {
-      name: 'Frozen',
-      tab: 'frozen'
-    }, {
-      name: 'Eggs',
-      tab: 'eggs'
-    }, {
-      name: 'Cloths',
-      tab: 'cloths'
-    }, {
-      name: 'Snacks',
-      tab: 'snacks'
-    }]
-    const data = reactive({
-      currentTab: types[0].tab,
-      coreList: []
+
+const types = [
+  { name: 'All Items', tab: 'all' },
+  { name: 'Sales', tab: 'sales' },
+  { name: 'Fruits', tab: 'fruits' },
+  { name: 'Deli', tab: 'deli' },
+  { name: 'Bakery', tab: 'bakery' },
+  { name: 'Dairy', tab: 'dairy' },
+  { name: 'Meat', tab: 'meat' },
+  { name: 'Vegetables', tab: 'vegetables' },
+  { name: 'Seafood', tab: 'seafood' },
+  { name: 'Pantry', tab: 'pantry' },
+  { name: 'Frozen', tab: 'frozen' },
+  { name: 'Eggs', tab: 'eggs' },
+  { name: 'Cloths', tab: 'cloths' },
+  { name: 'Snacks', tab: 'snacks' }
+]
+
+// Tab switch method
+const useTabEffect = () => {
+  const currentTab = ref(types[0].tab)
+  const handleTabClick = (tab) => {
+    currentTab.value = tab
+  }
+  return { currentTab, handleTabClick }
+}
+
+// type list method
+const useCurrentListEffect = (currentTab) => {
+  const myRoute = useRoute()
+  const storeId = myRoute.params.id
+  const core = reactive({ list: [] })
+  const getCoreData = async () => {
+    const result = await get(`/api/store/${storeId}/products`, {
+      tab: currentTab.value
     })
-    const getCoreData = async (tab) => {
-      const result = await get('/api/store/1/products', { tab })
-      if (result?.errno === 0 && result?.data?.length) {
-        data.coreList = result.data
-      }
+    if (result?.errno === 0 && result?.data?.length) {
+      core.list = result.data
     }
-    const handleTypeClick = (tab) => {
-      getCoreData(tab)
-      data.currentTab = tab
-    }
-    // show all product items
-    getCoreData('all')
-    const { coreList, currentTab } = toRefs(data)
-    return { coreList, currentTab, types, handleTypeClick }
+  }
+  watchEffect(() => { getCoreData() })
+
+  const { list } = toRefs(core)
+  return { list }
+}
+
+export default {
+  name: 'Content',
+  setup () {
+    const { currentTab, handleTabClick } = useTabEffect()
+    const { list } = useCurrentListEffect(currentTab)
+    return { types, currentTab, handleTabClick, list }
   }
 }
 </script>
