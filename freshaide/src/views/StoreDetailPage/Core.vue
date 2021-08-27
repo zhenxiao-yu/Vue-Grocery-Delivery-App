@@ -1,21 +1,28 @@
 <template>
     <div class="core">
         <div class="type">
-            <div class="type__item type__item--active">All Items</div>
-            <div class="type__item">Sale</div>
-            <div class="type__item">Fruits</div>
-            <div class="type__item">Snacks</div>
-            <div class="type__item">Cloths</div>
+            <div
+                class="type__item"
+                v-for="item in types"
+                :key="item.name"
+                @click="() => handleTypeClick(item.tab)"
+            >
+            {{item.name}}
+            </div>
         </div>
         <div class="product">
-            <div class="product__item">
-                <img class="product__item__img" src="https://www.alportsyndrome.org/wp-content/uploads/2015/11/Kidney-reverse.jpg" />
+            <div
+                class="product__item"
+                v-for="item in coreList"
+                :key="item.id"
+            >
+                <img class="product__item__img" :src="item.img" />
                 <div class="product__item__info">
-                    <h4 class="product__item__title">Donor's kidney</h4>
-                    <p class="product__item__sales"> Monthly Sales: 437+</p>
+                    <h4 class="product__item__title">{{item.name}}</h4>
+                    <p class="product__item__sales"> Monthly Sales: {{item.sales}}</p>
                     <p class="product__item__price">
-                        <span class="product__item__cad">&#36;</span>4,999 ea
-                        <span class="product__item__origin">&#36;5,580 ea</span>
+                        <span class="product__item__cad">&#36;</span>{{item.price}} ea
+                        <span class="product__item__origin">&#36;{{item.org}}</span>
                     </p>
                 </div>
                 <div class="product__count">
@@ -29,8 +36,69 @@
 </template>
 
 <script>
+import { reactive, toRefs } from 'vue'
+import { get } from '../../utils/req'
 export default {
-
+  name: 'Core',
+  setup () {
+    const types = [{
+      name: 'All Items',
+      tab: 'all'
+    }, {
+      name: 'Sales',
+      tab: 'sales'
+    }, {
+      name: 'Fruits',
+      tab: 'fruits'
+    }, {
+      name: 'Deli',
+      tab: 'deli'
+    }, {
+      name: 'Bakery',
+      tab: 'bakery'
+    }, {
+      name: 'Dairy',
+      tab: 'dairy'
+    }, {
+      name: 'Meat',
+      tab: 'meat'
+    }, {
+      name: 'Vegetables',
+      tab: 'vegetables'
+    }, {
+      name: 'Seafood',
+      tab: 'seafood'
+    }, {
+      name: 'Pantry',
+      tab: 'pantry'
+    }, {
+      name: 'Frozen',
+      tab: 'frozen'
+    }, {
+      name: 'Eggs',
+      tab: 'eggs'
+    }, {
+      name: 'Cloths',
+      tab: 'cloths'
+    }, {
+      name: 'Snacks',
+      tab: 'snacks'
+    }]
+    const data = reactive({ coreList: [1, 2, 3] })
+    const getCoreData = async (tab) => {
+      const result = await get('/api/store/1/products', { tab })
+      if (result?.errno === 0 && result?.data?.length) {
+        data.coreList = result.data
+      }
+    }
+    const handleTypeClick = (tab) => {
+      getCoreData(tab)
+    }
+    // show all product items
+    getCoreData('all')
+    const { coreList } = toRefs(data)
+    return { coreList, types, handleTypeClick }
+  }
 }
 </script>
 
@@ -55,7 +123,7 @@ export default {
     &__item {
         line-height: 0.4rem;
         text-align: center;
-        font-size: 0.14rem;
+        font-size: 0.13rem;
         font-family: $content-font;
         color: $content-font-color;
         &--active {
