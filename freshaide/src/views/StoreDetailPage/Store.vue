@@ -15,6 +15,7 @@
     </div>
     <StoreInfo :item="item" :hideBorder="true" v-if="item.img"/>
     <Core />
+    <Cart/>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { get } from '../../utils/req'
 import StoreInfo from '../../components/StoreInfo'
 import Core from './Core'
+import Cart from './Cart'
 
 // get current store information
 const useStoreInfoEffect = () => {
@@ -50,7 +52,7 @@ const useReturnRouterEffect = () => {
 
 export default {
   name: 'Store',
-  components: { StoreInfo, Core },
+  components: { StoreInfo, Core, Cart },
   setup () {
     const { item, getItemData } = useStoreInfoEffect()
     const handleReturnClick = useReturnRouterEffect()
