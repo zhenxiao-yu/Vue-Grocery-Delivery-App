@@ -44,8 +44,8 @@
 <script>
 import { reactive, ref, toRefs, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
 import { get } from '../../utils/req'
+import { useCommonCartEffect } from './commonCartEffect'
 
 const types = [
   { name: 'All Items', tab: 'all' },
@@ -92,17 +92,6 @@ const useCurrentListEffect = (currentTab) => {
   return { list }
 }
 
-// cart related method
-const useCartEffect = () => {
-  const store = useStore()
-  const { cartList } = toRefs(store.state)
-  const changeCartItem = (storeId, productId, productInfo, num) => {
-    store.commit('changeCartItem', { storeId, productId, productInfo, num })
-    console.log(storeId, productId, productInfo, num)
-  }
-  return { cartList, changeCartItem }
-}
-
 export default {
   name: 'Content',
   setup () {
@@ -110,7 +99,7 @@ export default {
     const storeId = myRoute.params.id
     const { currentTab, handleTabClick } = useTabEffect()
     const { list } = useCurrentListEffect(currentTab)
-    const { cartList, changeCartItem } = useCartEffect()
+    const { cartList, changeCartItem } = useCommonCartEffect()
     return { types, currentTab, handleTabClick, list, cartList, storeId, changeCartItem }
   }
 }
@@ -159,7 +148,7 @@ export default {
             overflow: hidden;
         }
         &__img {
-            width: 0.68 rem;
+            width: 0.68rem;
             height: 0.68rem;
             margin-right: 0.16rem;
         }
