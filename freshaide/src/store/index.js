@@ -31,6 +31,7 @@ export default createStore({
       }
       // change item amount
       product.count = product.count + payload.num
+      if (payload.num > 0) { product.select = true }
       // limit delete item number (can't be negative)
       if (product.count < 0) { product.count = 0 }
       // limit add item number (can't be more than 99)

@@ -7,6 +7,12 @@
       >
       <!-- hide cart if product amount is 0 -->
         <div class="product__item" v-if="item.count > 0">
+          <div
+            class="product__item__select iconfont"
+            v-html="item.select ? '&#xe78d;':'&#xe767;'"
+            @click="toggleSelect(storeId, item.id)"
+          >
+          </div>
           <img class="product__item__img" :src="item.img" />
           <div class="product__item__info">
             <h4 class="product__item__title">{{item.name}}</h4>
@@ -72,7 +78,9 @@ const useCartEffect = (storeId) => {
     if (productList) {
       for (const i in productList) {
         const product = productList[i]
-        count += (product.count * product.price)
+        if (product.select) {
+          count += (product.count * product.price)
+        }
       }
     }
     return count.toFixed(2)
@@ -84,7 +92,11 @@ const useCartEffect = (storeId) => {
     return productList
   })
 
-  return { total, price, productList, changeCartItem }
+  const toggleSelect = (storeId, productId) => {
+
+  }
+
+  return { total, price, productList, changeCartItem, toggleSelect }
 }
 
 export default {
@@ -118,6 +130,14 @@ export default {
     padding: .12rem 0;
     margin: 0 .16rem;
     border-bottom: .01rem solid $content-bg-color;
+
+    &__select{
+      line-height: 0.5rem;
+      margin-right: 0.2rem;
+      color: $content-highlight-color;
+      font-size: 0.2rem;
+    }
+
     &__info {
       overflow: hidden;
     }
