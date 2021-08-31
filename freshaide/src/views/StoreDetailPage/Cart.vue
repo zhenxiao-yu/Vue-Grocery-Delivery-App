@@ -11,8 +11,7 @@
             class="product__item__select iconfont"
             v-html="item.select ? '&#xe78d;':'&#xe767;'"
             @click="toggleSelect(storeId, item.id)"
-          >
-          </div>
+          />
           <img class="product__item__img" :src="item.img" />
           <div class="product__item__info">
             <h4 class="product__item__title">{{item.name}}</h4>
@@ -93,7 +92,7 @@ const useCartEffect = (storeId) => {
   })
 
   const toggleSelect = (storeId, productId) => {
-
+    store.commit('toggleSelect', { storeId, productId })
   }
 
   return { total, price, productList, changeCartItem, toggleSelect }
@@ -104,8 +103,8 @@ export default {
   setup () {
     const myRoute = useRoute()
     const storeId = myRoute.params.id
-    const { total, price, productList, changeCartItem } = useCartEffect(storeId)
-    return { total, price, storeId, productList, changeCartItem }
+    const { total, price, productList, changeCartItem, toggleSelect } = useCartEffect(storeId)
+    return { total, price, storeId, productList, changeCartItem, toggleSelect }
   }
 }
 </script>

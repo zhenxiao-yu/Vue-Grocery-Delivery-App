@@ -1,8 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import Home from '../views/HomePage/Home'
-// import Store from '../views/StoreDetailPage/Store'
-// import Login from '../views/LoginPage/Login'
-// import Register from '../views/RegisterPage/Register'
 
 const routes = [
   {

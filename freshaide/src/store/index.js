@@ -38,6 +38,11 @@ export default createStore({
       if (product.count > 99) { product.count = 99 }
       storeInfo[productId] = product
       state.cartList[storeId] = storeInfo
+    },
+    toggleSelect (state, payload) {
+      const { storeId, productId } = payload
+      const product = state.cartList[storeId][productId]
+      product.select = !product.select
     }
   },
   actions: {
