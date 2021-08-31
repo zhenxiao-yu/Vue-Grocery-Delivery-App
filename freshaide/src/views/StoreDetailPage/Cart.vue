@@ -1,6 +1,7 @@
 <template>
+  <div class="overlay" v-if="showCart"/>
   <div class="cart">
-    <div class="product">
+    <div class="product" v-if="showCart">
       <div class="product__controller">
         <div class="product__controller__all" @click="() => selectAllCart(storeId)">
           <span
@@ -47,7 +48,7 @@
     </div>
     <div class="checkout">
       <div class="checkout__icon">
-        <span class="checkout__icon__img iconfont">&#xe67d;</span>
+        <span class="checkout__icon__img iconfont" @click="handleCartShow">&#xe67d;</span>
         <div class="checkout__icon__tag">{{total}}</div>
       </div>
       <div class="checkout__info">
@@ -59,7 +60,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { useCommonCartEffect } from './commonCartEffect'
@@ -140,8 +141,12 @@ export default {
   setup () {
     const myRoute = useRoute()
     const storeId = myRoute.params.id
+    const showCart = ref(false)
+    const handleCartShow = () => {
+      showCart.value = !showCart.value
+    }
     const { total, price, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart } = useCartEffect(storeId)
-    return { total, price, storeId, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart }
+    return { total, price, storeId, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart, showCart, handleCartShow }
   }
 }
 </script>
@@ -149,11 +154,22 @@ export default {
 <style lang="scss" scoped>
 @import "../../style/variables.scss";
 @import '../../style/mixins.scss';
+.overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
 .cart {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2;
+  background: #fff;
 }
 .product {
   overflow-y: scroll;
@@ -176,6 +192,7 @@ export default {
       margin: 0px 0px 0px 16px;
     }
     &__icon{
+      display: inline-block;
       color: $content-highlight-color;
       font-size: 0.2rem;
     }
