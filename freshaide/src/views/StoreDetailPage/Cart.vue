@@ -1,6 +1,13 @@
 <template>
   <div class="cart">
     <div class="product">
+      <div class="product__controller">
+        <div class="product__controller__all">
+          <span class="product__controller__icon iconfont">&#xe767;</span>
+          Select All
+        </div>
+        <div class="product__controller__clear" @click ="() => clearCart(storeId)">Clear</div>
+      </div>
       <template
         v-for="item in productList"
         :key="item.id"
@@ -91,11 +98,17 @@ const useCartEffect = (storeId) => {
     return productList
   })
 
+  // commit select cart item
   const toggleSelect = (storeId, productId) => {
     store.commit('toggleSelect', { storeId, productId })
   }
 
-  return { total, price, productList, changeCartItem, toggleSelect }
+  // commit clear cart item list
+  const clearCart = (storeId) => {
+    store.commit('clearCart', { storeId })
+  }
+
+  return { total, price, productList, changeCartItem, toggleSelect, clearCart }
 }
 
 export default {
@@ -103,8 +116,8 @@ export default {
   setup () {
     const myRoute = useRoute()
     const storeId = myRoute.params.id
-    const { total, price, productList, changeCartItem, toggleSelect } = useCartEffect(storeId)
-    return { total, price, storeId, productList, changeCartItem, toggleSelect }
+    const { total, price, productList, changeCartItem, toggleSelect, clearCart } = useCartEffect(storeId)
+    return { total, price, storeId, productList, changeCartItem, toggleSelect, clearCart }
   }
 }
 </script>
@@ -123,6 +136,28 @@ export default {
   flex: 1;
   background: #FFF;
   font-family: $content-font;
+  &__controller {
+    display: flex;
+    line-height: 0.52rem;
+    font-size: 0.14rem;
+    color: $content-font-color;
+    border-bottom: .01rem solid $content-border-color;
+    &__clear{
+      flex: 1;
+      margin-right: 0.16rem;
+      text-align: right;
+      font-size: 0.14rem;
+    }
+    &__all{
+      width: 1rem;
+      margin-left: 0.18rem;
+    }
+    &__icon{
+      color: $content-highlight-color;
+      font-size: 0.2rem;
+    }
+  }
+
   &__item {
     position: relative;
     display: flex;

@@ -43,6 +43,10 @@ export default createStore({
       const { storeId, productId } = payload
       const product = state.cartList[storeId][productId]
       product.select = !product.select
+    },
+    clearCart (state, payload) {
+      const { storeId } = payload
+      state.cartList[storeId] = {}
     }
   },
   actions: {
