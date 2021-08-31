@@ -30,7 +30,7 @@
                       class="product__count__minus"
                       @click="() => {changeCartItem(storeId, item.id, item, -1)}"
                       >-</span>
-                    {{cartList?.[storeId]?.[item.id]?.count || 0 }}
+                    {{item.count || 0 }}
                     <span
                       class="product__count__plus"
                       @click="() => {changeCartItem(storeId, item.id, item, 1)}"
@@ -93,14 +93,14 @@ const useCurrentListEffect = (currentTab) => {
 }
 
 export default {
-  name: 'Content',
+  name: 'Core',
   setup () {
     const myRoute = useRoute()
     const storeId = myRoute.params.id
     const { currentTab, handleTabClick } = useTabEffect()
     const { list } = useCurrentListEffect(currentTab)
-    const { cartList, changeCartItem } = useCommonCartEffect()
-    return { types, currentTab, handleTabClick, list, cartList, storeId, changeCartItem }
+    const { changeCartItem } = useCommonCartEffect()
+    return { types, currentTab, handleTabClick, list, storeId, changeCartItem }
   }
 }
 </script>
