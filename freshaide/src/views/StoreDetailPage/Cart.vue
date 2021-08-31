@@ -1,5 +1,5 @@
 <template>
-  <div class="overlay" v-if="showCart"/>
+  <div class="overlay" v-if="showCart" @click="handleCartShow"/>
   <div class="cart">
     <div class="product" v-if="showCart">
       <div class="product__controller">
@@ -11,7 +11,9 @@
           </span>
           Select All
         </div>
-        <div class="product__controller__clear" @click ="() => clearCart(storeId)">Clear</div>
+        <div class="product__controller__clear">
+          <span class="product__controller__clear__area" @click ="() => clearCart(storeId)">Clear</span>
+        </div>
       </div>
       <template
         v-for="item in productList"
@@ -54,7 +56,11 @@
       <div class="checkout__info">
         Total：<span class="checkout__info__price">&#36; {{price}}</span>
       </div>
-      <div class="checkout__btn">Checkout</div>
+      <div class="checkout__btn">
+        <router-link :to="{name: 'Home'}">
+        Checkout
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -65,7 +71,7 @@ import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { useCommonCartEffect } from './commonCartEffect'
 
-// get cart Info method
+// get cart info method
 const useCartEffect = (storeId) => {
   const { changeCartItem } = useCommonCartEffect()
   const store = useStore()
@@ -82,6 +88,7 @@ const useCartEffect = (storeId) => {
     }
     return count
   })
+
   // compute product price
   const price = computed(() => {
     const productList = cartList[storeId]
@@ -136,16 +143,22 @@ const useCartEffect = (storeId) => {
   return { total, price, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart }
 }
 
+// show and hide shopping cart method
+const toggleCartEffect = () => {
+  const showCart = ref(false)
+  const handleCartShow = () => {
+    showCart.value = !showCart.value
+  }
+  return { showCart, handleCartShow }
+}
+
 export default {
   name: 'Cart',
   setup () {
     const myRoute = useRoute()
     const storeId = myRoute.params.id
-    const showCart = ref(false)
-    const handleCartShow = () => {
-      showCart.value = !showCart.value
-    }
     const { total, price, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart } = useCartEffect(storeId)
+    const { showCart, handleCartShow } = toggleCartEffect()
     return { total, price, storeId, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart, showCart, handleCartShow }
   }
 }
@@ -174,7 +187,7 @@ export default {
 .product {
   overflow-y: scroll;
   flex: 1;
-  background: #FFF;
+  background: #fff;
   font-family: $content-font;
   &__controller {
     display: flex;
@@ -182,10 +195,13 @@ export default {
     font-size: 0.14rem;
     color: $content-font-color;
     border-bottom: .01rem solid $content-border-color;
-    &__clear{
+    &__clear {
       flex: 1;
       margin-right: 0.16rem;
       text-align: right;
+      &__area {
+        display: inline-block;
+      }
     }
     &__all{
       width: 1rem;
@@ -193,8 +209,10 @@ export default {
     }
     &__icon{
       display: inline-block;
+      vertical-align: top;
       color: $content-highlight-color;
       font-size: 0.2rem;
+      margin-right: 0.05rem;
     }
   }
 
@@ -205,7 +223,7 @@ export default {
     margin: 0 .16rem;
     border-bottom: .01rem solid $content-bg-color;
 
-    &__select{
+    &__select {
       line-height: 0.5rem;
       margin-right: 0.2rem;
       color: $content-highlight-color;
@@ -246,7 +264,7 @@ export default {
     .product__number {
       position: absolute;
       right: 0;
-      bottom: .12rem;
+      bottom: .26rem;
       &__minus, &__plus
        {
         display: inline-block;
@@ -320,6 +338,10 @@ export default {
     text-align: center;
     color: $content-bg-color;
     font-size: .14rem;
+    a {
+      color: $content-bg-color;
+      text-decoration: none;
+    }
   }
 }
 </style>
