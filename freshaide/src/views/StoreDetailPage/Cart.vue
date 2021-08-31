@@ -2,8 +2,12 @@
   <div class="cart">
     <div class="product">
       <div class="product__controller">
-        <div class="product__controller__all">
-          <span class="product__controller__icon iconfont">&#xe767;</span>
+        <div class="product__controller__all" @click="() => selectAllCart(storeId)">
+          <span
+            class="product__controller__icon iconfont"
+            v-html="selectAll ? '&#xe78d;':'&#xe767;'"
+          >
+          </span>
           Select All
         </div>
         <div class="product__controller__clear" @click ="() => clearCart(storeId)">Clear</div>
@@ -92,6 +96,21 @@ const useCartEffect = (storeId) => {
     return count.toFixed(2)
   })
 
+  // select all
+  const selectAll = computed(() => {
+    const productList = cartList[storeId]
+    let result = true
+    if (productList) {
+      for (const i in productList) {
+        const product = productList[i]
+        if (product.count > 0 && !product.select) {
+          result = false
+        }
+      }
+    }
+    return result
+  })
+
   // list of product in the shopping cart
   const productList = computed(() => {
     const productList = cartList[storeId] || []
@@ -108,7 +127,12 @@ const useCartEffect = (storeId) => {
     store.commit('clearCart', { storeId })
   }
 
-  return { total, price, productList, changeCartItem, toggleSelect, clearCart }
+  // commit select all cart items
+  const selectAllCart = (storeId) => {
+    store.commit('selectAllCart', { storeId })
+  }
+
+  return { total, price, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart }
 }
 
 export default {
@@ -116,8 +140,8 @@ export default {
   setup () {
     const myRoute = useRoute()
     const storeId = myRoute.params.id
-    const { total, price, productList, changeCartItem, toggleSelect, clearCart } = useCartEffect(storeId)
-    return { total, price, storeId, productList, changeCartItem, toggleSelect, clearCart }
+    const { total, price, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart } = useCartEffect(storeId)
+    return { total, price, storeId, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart }
   }
 }
 </script>
@@ -138,7 +162,7 @@ export default {
   font-family: $content-font;
   &__controller {
     display: flex;
-    line-height: 0.52rem;
+    line-height: 0.35rem;
     font-size: 0.14rem;
     color: $content-font-color;
     border-bottom: .01rem solid $content-border-color;
@@ -146,11 +170,10 @@ export default {
       flex: 1;
       margin-right: 0.16rem;
       text-align: right;
-      font-size: 0.14rem;
     }
     &__all{
       width: 1rem;
-      margin-left: 0.18rem;
+      margin: 0px 0px 0px 16px;
     }
     &__icon{
       color: $content-highlight-color;
