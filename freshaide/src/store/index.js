@@ -1,9 +1,20 @@
 import { createStore } from 'vuex'
 
+// store cart item info in local storage
+const setLocalStorage = (state) => {
+  const { cartList } = state
+  const cartListString = JSON.stringify(cartList)
+  localStorage.cartList = cartListString
+}
+
+const getLocalStorage = () => {
+  // { storeId: {storeName: ', productList: { productId:{}}} }
+  return JSON.parse(localStorage.cartList) || {}
+}
+
 export default createStore({
   state: {
-    // { storeId: {storeName: ', productList: { productId:{}}} }
-    cartList: {}
+    cartList: getLocalStorage()
   },
   mutations: {
     changeCartItem (state, payload) {
@@ -25,6 +36,7 @@ export default createStore({
       if (product.count > 99) { product.count = 99 }
       storeInfo.productList[productId] = product
       state.cartList[storeId] = storeInfo
+      setLocalStorage(state)
     },
     changeStoreName (state, payload) {
       const { storeId, storeName } = payload
@@ -33,15 +45,18 @@ export default createStore({
       }
       storeInfo.storeName = storeName
       state.cartList[storeId] = storeInfo
+      setLocalStorage(state)
     },
     toggleSelect (state, payload) {
       const { storeId, productId } = payload
       const product = state.cartList[storeId].productList[productId]
       product.select = !product.select
+      setLocalStorage(state)
     },
     clearCart (state, payload) {
       const { storeId } = payload
       state.cartList[storeId].productList = {}
+      setLocalStorage(state)
     },
     selectAllCart (state, payload) {
       const { storeId } = payload
@@ -52,6 +67,7 @@ export default createStore({
           product.select = true
         }
       }
+      setLocalStorage(state)
     }
   },
   actions: {
