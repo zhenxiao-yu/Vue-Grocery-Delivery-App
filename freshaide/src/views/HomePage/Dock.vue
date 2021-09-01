@@ -6,9 +6,11 @@
         :class="{'dock__nav_elem': true, 'dock__nav_elem--active': index===0}"
         :key="item.label"
       >
+        <router-link :to='item.to'>
         <!-- v-html to convert &#xe7a7; code to html element -->
-        <div class="iconfont" v-html="item.icon"/>
-        <div class="dock__label">{{item.label}}</div>
+          <div class="iconfont" v-html="item.icon"/>
+          <div class="dock__label">{{item.label}}</div>
+        </router-link>
       </span>
     </div>
 </template>
@@ -18,10 +20,10 @@ export default {
   name: 'Dock',
   setup () {
     const dockItemsList = [
-      { icon: '&#xe7a7;', label: 'Home' },
-      { icon: '&#xe747;', label: 'Cart' },
-      { icon: '&#xe7b3;', label: 'Orders' },
-      { icon: '&#xe7c9;', label: 'Profile' }
+      { icon: '&#xe7a7;', label: 'Home', to: { name: 'Home' } },
+      { icon: '&#xe747;', label: 'Cart', to: { name: 'CartItems' } },
+      { icon: '&#xe7b3;', label: 'Orders', to: { name: 'Home' } },
+      { icon: '&#xe7c9;', label: 'Profile', to: { name: 'Home' } }
     ]
     return { dockItemsList }
   }
@@ -43,19 +45,24 @@ export default {
   //total dock height = 0.5rem
   height: 0.49rem;
   border-top: 0.01 solid $content-bg-color;
-  color: $content-font-color;
   font-family: $content-font;
   //navigation element
   &__nav_elem {
     flex: 1;
     text-align: center;
+    a {
+      color: $content-font-color;
+      text-decoration: none;
+    }
     .iconfont {
       font-size: 0.18rem;
       margin: 0.07rem 0 0.02rem 0;
     }
     //active navigation element
     &--active {
-      color: $content-highlight-color;
+      a {
+        color: $content-highlight-color;
+      }
     }
   }
   //navigation label

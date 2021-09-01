@@ -6,9 +6,17 @@ const routes = [
     name: 'Home',
     component: () => import('../views/HomePage/Home')
   }, {
+    path: '/cartItems',
+    name: 'CartItems',
+    component: () => import('../views/CartPage/CartItems')
+  }, {
     path: '/store/:id',
     name: 'Store',
     component: () => import('../views/StoreDetailPage/Store')
+  }, {
+    path: '/orderConfirmation/:id',
+    name: 'OrderConfirmation',
+    component: () => import('../views/ConfirmPage/OrderConfirmation')
   }, {
     path: '/login',
     name: 'Login',
