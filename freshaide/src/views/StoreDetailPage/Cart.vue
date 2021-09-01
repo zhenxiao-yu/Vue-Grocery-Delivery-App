@@ -1,12 +1,12 @@
 <template>
-  <div class="overlay" v-if="showCart" @click="handleCartShow"/>
+  <div class="overlay" v-if="showCart && myCalculator.total > 0" @click="handleCartShow"/>
   <div class="cart">
-    <div class="product" v-if="showCart">
+    <div class="product" v-if="showCart && myCalculator.total > 0">
       <div class="product__controller">
         <div class="product__controller__all" @click="() => selectAllCart(storeId)">
           <span
             class="product__controller__icon iconfont"
-            v-html="selectAll ? '&#xe78d;':'&#xe767;'"
+            v-html="myCalculator.selectAll ? '&#xe78d;':'&#xe767;'"
           >
           </span>
           Select All
@@ -51,10 +51,10 @@
     <div class="checkout">
       <div class="checkout__icon">
         <span class="checkout__icon__img iconfont" @click="handleCartShow">&#xe67d;</span>
-        <div class="checkout__icon__tag">{{total}}</div>
+        <div class="checkout__icon__tag">{{myCalculator.total}}</div>
       </div>
       <div class="checkout__info">
-        Total：<span class="checkout__info__price">&#36; {{price}}</span>
+        Total：<span class="checkout__info__price">&#36; {{myCalculator.price}}</span>
       </div>
       <div class="checkout__btn">
         <router-link :to="{name: 'Home'}">
@@ -73,49 +73,25 @@ import { useCommonCartEffect } from './commonCartEffect'
 
 // get cart info method
 const useCartEffect = (storeId) => {
-  const { changeCartItem } = useCommonCartEffect()
   const store = useStore()
-  const cartList = store.state.cartList
+  const { cartList, changeCartItem } = useCommonCartEffect()
 
-  const total = computed(() => {
+  const myCalculator = computed(() => {
     const productList = cartList[storeId]?.productList
-    let count = 0
+    const result = { total: 0, price: 0, selectAll: true }
     if (productList) {
       for (const i in productList) {
         const product = productList[i]
-        count += product.count
-      }
-    }
-    return count
-  })
-
-  // compute product price
-  const price = computed(() => {
-    const productList = cartList[storeId]?.productList
-    let count = 0
-    if (productList) {
-      for (const i in productList) {
-        const product = productList[i]
+        result.total += product.count
         if (product.select) {
-          count += (product.count * product.price)
+          result.price += (product.count * product.price)
         }
-      }
-    }
-    return count.toFixed(2)
-  })
-
-  // select all
-  const selectAll = computed(() => {
-    const productList = cartList[storeId]?.productList
-    let result = true
-    if (productList) {
-      for (const i in productList) {
-        const product = productList[i]
         if (product.count > 0 && !product.select) {
-          result = false
+          result.selectAll = false
         }
       }
     }
+    result.price = result.price.toFixed(2)
     return result
   })
 
@@ -140,7 +116,7 @@ const useCartEffect = (storeId) => {
     store.commit('selectAllCart', { storeId })
   }
 
-  return { total, price, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart }
+  return { myCalculator, productList, changeCartItem, toggleSelect, clearCart, selectAllCart }
 }
 
 // show and hide shopping cart method
@@ -157,9 +133,9 @@ export default {
   setup () {
     const myRoute = useRoute()
     const storeId = myRoute.params.id
-    const { total, price, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart } = useCartEffect(storeId)
+    const { myCalculator, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart } = useCartEffect(storeId)
     const { showCart, handleCartShow } = toggleCartEffect()
-    return { total, price, storeId, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart, showCart, handleCartShow }
+    return { myCalculator, storeId, productList, changeCartItem, toggleSelect, clearCart, selectAll, selectAllCart, showCart, handleCartShow }
   }
 }
 </script>

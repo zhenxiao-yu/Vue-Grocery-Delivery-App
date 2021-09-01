@@ -29,8 +29,8 @@
                     <span
                       class="product__count__minus"
                       @click="() => {editCartItem(storeId, item.id, item, -1, storeName)}"
-                      >-</span>
-                    {{cartList?.[storeId]?.productList?.[item.id]?.count || 0 }}
+                    >-</span>
+                      {{getProductAmount(storeId, item.id)}}
                     <span
                       class="product__count__plus"
                       @click="() => {editCartItem(storeId, item.id, item, 1, storeName)}"
@@ -93,24 +93,33 @@ const useCurrentListEffect = (currentTab) => {
   return { list }
 }
 
+// cart related method
+const useCartEffect = () => {
+  const store = useStore()
+  const { changeCartItem, cartList } = useCommonCartEffect()
+  const changeStoreName = (storeId, storeName) => {
+    store.commit('changeStoreName', { storeId, storeName })
+  }
+  const editCartItem = (storeId, productId, item, num, storeName) => {
+    changeCartItem(storeId, productId, item, num)
+    changeStoreName(storeId, storeName)
+  }
+  const getProductAmount = (storeId, productId) => {
+    return cartList?.[storeId]?.productList?.[productId]?.count || 0
+  }
+  return { cartList, editCartItem, getProductAmount }
+}
+
 export default {
   name: 'Core',
   props: ['storeName'],
   setup () {
     const myRoute = useRoute()
-    const store = useStore()
     const storeId = myRoute.params.id
     const { currentTab, handleTabClick } = useTabEffect()
     const { list } = useCurrentListEffect(currentTab)
-    const { changeCartItem, cartList } = useCommonCartEffect()
-    const changeStoreName = (storeId, storeName) => {
-      store.commit('changeStoreName', { storeId, storeName })
-    }
-    const editCartItem = (storeId, productId, item, num, storeName) => {
-      changeCartItem(storeId, productId, item, num)
-      changeStoreName(storeId, storeName)
-    }
-    return { types, currentTab, handleTabClick, list, storeId, editCartItem, cartList }
+    const { editCartItem, cartList, getProductAmount } = useCartEffect()
+    return { types, currentTab, handleTabClick, list, storeId, editCartItem, cartList, getProductAmount }
   }
 }
 </script>
