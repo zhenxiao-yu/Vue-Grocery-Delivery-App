@@ -2,14 +2,15 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    // { storeId: {storeName: ', productList: { productId:{}}} }
     cartList: {}
   },
   mutations: {
     changeCartItem (state, payload) {
       const { storeId, productId, productInfo } = payload
       let storeInfo = state.cartList[storeId]
-      if (!storeInfo) { storeInfo = {} }
-      let product = storeInfo[productId]
+      if (!storeInfo) { storeInfo = { storeName: '', productList: {} } }
+      let product = storeInfo.productList[productId]
       if (!product) {
         // if item does not exist, set product info
         product = productInfo
@@ -22,7 +23,7 @@ export default createStore({
       if (product.count < 0) { product.count = 0 }
       // limit add item number (can't be more than 99)
       if (product.count > 99) { product.count = 99 }
-      storeInfo[productId] = product
+      storeInfo.productList[productId] = product
       state.cartList[storeId] = storeInfo
     },
     changeStoreName (state, payload) {
@@ -35,16 +36,16 @@ export default createStore({
     },
     toggleSelect (state, payload) {
       const { storeId, productId } = payload
-      const product = state.cartList[storeId][productId]
+      const product = state.cartList[storeId].productList[productId]
       product.select = !product.select
     },
     clearCart (state, payload) {
       const { storeId } = payload
-      state.cartList[storeId] = {}
+      state.cartList[storeId].productList = {}
     },
     selectAllCart (state, payload) {
       const { storeId } = payload
-      const products = state.cartList[storeId]
+      const products = state.cartList[storeId].productList
       if (products) {
         for (const k in products) {
           const product = products[k]
