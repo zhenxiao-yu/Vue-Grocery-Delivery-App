@@ -14,7 +14,7 @@
        </div>
     </div>
     <StoreInfo :item="item" :hideBorder="true" v-if="item.img"/>
-    <Core />
+    <Core :storeName="item.name"/>
     <Cart/>
   </div>
 </template>

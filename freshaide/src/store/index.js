@@ -2,21 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    cartList: {
-      // first layer: store id
-      // storeId: {
-      // second layer: product id and amount
-      //   productId: {
-      //     id: '1',
-      //     name: 'Bananas',
-      //     img: 'https://assets.shop.loblaws.ca/products/20175355001/b1/en/front/20175355001_front_a01_@2.png',
-      //     sales: 454,
-      //     price: 1.45,
-      //     org: 1.57,
-      //     count: 3
-      //   },
-      // },
-    }
+    cartList: {}
   },
   mutations: {
     changeCartItem (state, payload) {
@@ -37,6 +23,14 @@ export default createStore({
       // limit add item number (can't be more than 99)
       if (product.count > 99) { product.count = 99 }
       storeInfo[productId] = product
+      state.cartList[storeId] = storeInfo
+    },
+    changeStoreName (state, payload) {
+      const { storeId, storeName } = payload
+      const storeInfo = state.cartList[storeId] || {
+        storeName: '', productList: {}
+      }
+      storeInfo.storeName = storeName
       state.cartList[storeId] = storeInfo
     },
     toggleSelect (state, payload) {
