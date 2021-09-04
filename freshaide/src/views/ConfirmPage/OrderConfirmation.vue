@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper">
-    <div class="top">
-      <div class="top__header">
-        <div class="iconfont top__header__back">&#xe6f2;</div>
+    <div class="index">
+      <div class="index__top">
+        <div class="iconfont index__top__return">&#xe743;</div>
         Order Confirmation
       </div>
-      <div class="top__receiver">
-        <div class="top__receiver__title">Deliver To</div>
-        <div class="top__receiver__address">北京理工大学国防科技园2号楼10层</div>
-        <div class="top__receiver__info">
-          <span class="top__receiver__info__name">瑶妹（先生）</span>
-          <span class="top__receiver__info__name">18911024266</span>
+      <div class="index__profile">
+        <div class="index__profile__title">Delivery Information</div>
+        <div class="index__profile__address">400 Eastcastle Pl</div>
+        <div class="index__profile__info">
+          <span class="index__profile__info__name">Mark Yu</span>
+          <span class="index__profile__info__name">(306)581-5556</span>
         </div>
-        <div class="iconfont top__receiver__icon">&#xe6f2;</div>
+        <div class="iconfont index__profile__icon">&#xe743;</div>
       </div>
     </div>
   </div>
@@ -25,6 +25,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+//import predefined scss files
+@import "../../style/variables.scss";
+
 .wrapper {
   position: absolute;
   left: 0;
@@ -32,27 +35,29 @@ export default {
   top: 0;
   bottom: 0;
   background-color: #eee;
+  color: $content-font-color;
+  font-family: $content-font;
 }
-.top {
+.index {
   position: relative;
   height: 1.96rem;
   background-size: 100% 1.59rem;
-  background-image: linear-gradient(0deg, rgba(0,145,255,0.00) 4%, #0091FF 50%);
+  background-image: linear-gradient(0deg, rgba(0,145,255,0.00) 4%, $content-highlight-color 50%);
   background-repeat: no-repeat;
-  &__header {
+  &__top {
     position: relative;
     padding-top: .26rem;
     line-height: .24rem;
     color: #FFF;
     text-align: center;
     font-size: .16rem;
-    &__back {
+    &__return {
       position: absolute;
       left: .18rem;
       font-size: .22rem;
     }
   }
-  &__receiver {
+  &__profile {
     position: absolute;
     left: .18rem;
     right: .18rem;
@@ -64,13 +69,13 @@ export default {
       line-height: .22rem;
       padding: .16rem 0 .14rem .16rem;
       font-size: .16rem;
-      color: #333;
+      color:  $content-font-color;
     }
     &__address {
       line-height: .2rem;
       padding: 0 .4rem 0 .16rem;
       font-size: .14rem;
-      color: #333;
+      color:  $content-font-color;
     }
     &__info {
       padding: .06rem 0 0 .16rem;
