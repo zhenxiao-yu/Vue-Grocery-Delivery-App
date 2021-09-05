@@ -17,5 +17,25 @@ export const useCommonCartEffect = (storeId) => {
     const storeName = cartList[storeId]?.storeName || ''
     return storeName
   })
-  return { cartList, storeName, productList, changeCartItem }
+
+  const myCalculator = computed(() => {
+    const productList = cartList[storeId]?.productList
+    const result = { total: 0, price: 0, selectAll: true }
+    if (productList) {
+      for (const i in productList) {
+        const product = productList[i]
+        result.total += product.count
+        if (product.select) {
+          result.price += (product.count * product.price)
+        }
+        if (product.count > 0 && !product.select) {
+          result.selectAll = false
+        }
+      }
+    }
+    result.price = result.price.toFixed(2)
+    return result
+  })
+
+  return { cartList, storeName, productList, changeCartItem, myCalculator }
 }
