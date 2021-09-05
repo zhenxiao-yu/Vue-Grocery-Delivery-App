@@ -69,12 +69,12 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import { useCommonCartEffect } from './commonCartEffect'
+import { useCommonCartEffect } from '../../effects/cartEffects'
 
 // get cart info method
 const useCartEffect = (storeId) => {
   const store = useStore()
-  const { cartList, changeCartItem } = useCommonCartEffect()
+  const { cartList, productList, changeCartItem } = useCommonCartEffect(storeId)
 
   const myCalculator = computed(() => {
     const productList = cartList[storeId]?.productList
@@ -93,12 +93,6 @@ const useCartEffect = (storeId) => {
     }
     result.price = result.price.toFixed(2)
     return result
-  })
-
-  // list of product in the shopping cart
-  const productList = computed(() => {
-    const productList = cartList[storeId]?.productList || []
-    return productList
   })
 
   // commit select cart item
