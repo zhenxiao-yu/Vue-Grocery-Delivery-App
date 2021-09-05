@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <HeaderArea />
+    <OrderList />
     <div class="order">
         <div class="order__total-price">Order Total: <b> &#36;{{myCalculator.price}} </b> </div>
         <div class="order__btn">Confirm</div>
@@ -12,10 +13,11 @@
 import { useRoute } from 'vue-router'
 import { useCommonCartEffect } from '../../effects/cartEffects'
 import HeaderArea from './HeaderArea'
+import OrderList from './OrderList'
 
 export default {
   name: 'OrderConfirmation',
-  components: { HeaderArea },
+  components: { HeaderArea, OrderList },
   setup () {
     const route = useRoute()
     const storeId = route.params.id

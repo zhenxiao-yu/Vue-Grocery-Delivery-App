@@ -29,6 +29,18 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+import { useCommonCartEffect } from '../../effects/cartEffects'
+
+export default {
+  name: 'OrderList',
+  setup () {
+    const route = useRoute()
+    const storeId = route.params.id
+    const { storeName, productList } = useCommonCartEffect(storeId)
+    return { storeName, productList }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
