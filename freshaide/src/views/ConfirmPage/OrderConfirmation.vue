@@ -17,24 +17,24 @@
     </div>
     <div class="products">
       <div class="products__title">
-        {{shopName}}
+        {{storeName}}
       </div>
        <div class="products__list">
         <div
           class="products__item"
           v-for="item in productList"
-          :key="item._id"
+          :key="item.id"
         >
-          <img class="products__item__img" :src="item.imgUrl" />
-          <div class="products__item__detail">
+          <img class="products__item__img" :src="item.img" />
+          <div class="products__item__info">
             <h4 class="products__item__title">{{item.name}}</h4>
             <p class="products__item__price">
               <span>
-                <span class="products__item__yen">&#36; </span>
+                <span class="products__item__cad">&#36; </span>
                 {{item.price}} x {{item.count}}
               </span>
               <span class="products__item__total">
-                 <span class="products__item__yen">&#36; </span>
+                 <span class="products__item__cad">&#36; </span>
                 {{item.price * item.count}}
               </span>
             </p>
@@ -46,15 +46,15 @@
 </template>
 
 <script>
-// import { useRoute } from 'vue-router'
-// import { useCommonCartEffect } from '../../effects/cartEffects'
+import { useRoute } from 'vue-router'
+import { useCommonCartEffect } from '../../effects/cartEffects'
 export default {
   name: 'OrderConfirmation',
   setup () {
-    // const route = useRoute()
-    // const shopId = route.params.id
-    // const { shopName, productList } = useCommonCartEffect(shopId)
-    // return { shopName, productList }
+    const route = useRoute()
+    const storeId = route.params.id
+    const { storeName, productList } = useCommonCartEffect(storeId)
+    return { storeName, productList }
   }
 }
 </script>
@@ -101,9 +101,9 @@ export default {
     background: #FFF;
     border-radius: .04rem;
     &__title {
-      line-height: .22rem;
-      padding: .16rem 0 .14rem .16rem;
-      font-size: .16rem;
+      line-height: 0.22rem;
+      padding: 0.16rem 0 0.14rem 0.16rem;
+      font-size: 0.16rem;
       color: $content-font-color;
     }
     &__address {
@@ -137,7 +137,7 @@ export default {
   &__title {
     padding: .16rem .16rem 0 .16rem;
     font-size: .16rem;
-    color: #333;
+    color: $content-font-color;
   }
   &__item {
     position: relative;
@@ -148,7 +148,7 @@ export default {
       height: .46rem;
       margin-right: .16rem;
     }
-    &__detail {
+    &__info {
       flex: 1;
     }
     &__title {
@@ -168,9 +168,9 @@ export default {
     &__total {
       flex: 1;
       text-align: right;
-      color: #000;
+      color: $content-font-color;
     }
-    &__yen {
+    &__cad {
       font-size: .12rem;
     }
   }
