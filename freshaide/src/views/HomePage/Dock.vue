@@ -3,7 +3,7 @@
       <!-- index = navigation item number -->
       <span
         v-for="(item, index) in dockItemsList"
-        :class="{'dock__nav_elem': true, 'dock__nav_elem--active': index===0}"
+        :class="{'dock__nav_elem': true, 'dock__nav_elem--active': index===currentIndex}"
         :key="item.label"
       >
         <router-link :to='item.to'>
@@ -18,6 +18,7 @@
 <script>
 export default {
   name: 'Dock',
+  props: ['currentIndex'],
   setup () {
     const dockItemsList = [
       { icon: '&#xe7a7;', label: 'Home', to: { name: 'Home' } },

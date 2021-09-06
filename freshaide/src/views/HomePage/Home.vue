@@ -6,7 +6,7 @@
       <Closeby />
     </div>
     <!-- Dock Compoenent -->
-    <Dock />
+    <Dock :currentIndex="0"/>
 </template>
 
 <script>
