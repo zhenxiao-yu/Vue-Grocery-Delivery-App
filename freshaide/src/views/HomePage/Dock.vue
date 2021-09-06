@@ -24,7 +24,7 @@ export default {
       { icon: '&#xe7a7;', label: 'Home', to: { name: 'Home' } },
       { icon: '&#xe747;', label: 'Cart', to: { name: 'CartItems' } },
       { icon: '&#xe7b3;', label: 'Orders', to: { name: 'Home' } },
-      { icon: '&#xe7c9;', label: 'Profile', to: { name: 'Home' } }
+      { icon: '&#xe7c9;', label: 'Profile', to: { name: 'PersonalInfo' } }
     ]
     return { dockItemsList }
   }
