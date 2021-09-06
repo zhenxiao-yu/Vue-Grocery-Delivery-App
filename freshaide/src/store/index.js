@@ -9,7 +9,11 @@ const setLocalStorage = (state) => {
 
 const getLocalStorage = () => {
   // { storeId: {storeName: ', productList: { productId:{}}} }
-  return JSON.parse(localStorage.cartList) || {}
+  try {
+    return JSON.parse(localStorage.cartList) || {}
+  } catch (e) {
+    return {}
+  }
 }
 
 export default createStore({
@@ -38,6 +42,7 @@ export default createStore({
       state.cartList[storeId] = storeInfo
       setLocalStorage(state)
     },
+    // fetch and change the name of the store
     changeStoreName (state, payload) {
       const { storeId, storeName } = payload
       const storeInfo = state.cartList[storeId] || {
@@ -47,17 +52,20 @@ export default createStore({
       state.cartList[storeId] = storeInfo
       setLocalStorage(state)
     },
+    // select/ deselect cart item
     toggleSelect (state, payload) {
       const { storeId, productId } = payload
       const product = state.cartList[storeId].productList[productId]
       product.select = !product.select
       setLocalStorage(state)
     },
+    // clear local cart list
     clearCart (state, payload) {
       const { storeId } = payload
       state.cartList[storeId].productList = {}
       setLocalStorage(state)
     },
+    // select all cart items
     selectAllCart (state, payload) {
       const { storeId } = payload
       const products = state.cartList[storeId].productList
@@ -68,10 +76,14 @@ export default createStore({
         }
       }
       setLocalStorage(state)
+    },
+    // empty cart list
+    clearCartData (state, storeId) {
+      state.cartList[storeId].productList = {}
+    },
+    // modify the list of address method
+    changeAddressList (state, addressList) {
+      state.addressList.splice(0, state.addressList.length, ...addressList)
     }
-  },
-  actions: {
-  },
-  modules: {
   }
 })
