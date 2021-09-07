@@ -16,6 +16,16 @@
         <div class="list__item__test">My Address</div>
         <div class="list__item__arrow iconfont">&#xe6f2;</div>
       </div>
+      <div class="list__item" @click="handleAddressClick">
+        <div class="list__item__icon iconfont">&#xe617;</div>
+        <div class="list__item__test">Help Center</div>
+        <div class="list__item__arrow iconfont">&#xe6f2;</div>
+      </div>
+      <div class="list__item" @click="handleAddressClick">
+        <div class="list__item__icon iconfont">&#xe617;</div>
+        <div class="list__item__test">My Wallet</div>
+        <div class="list__item__arrow iconfont">&#xe6f2;</div>
+      </div>
     </div>
     <div class="logout" @click="handleLogout">Logout</div>
   </div>
@@ -48,7 +58,7 @@ export default {
   setup () {
     const router = useRouter()
     const handleLogout = () => {
-      localStorage.removeItem('isLogin')
+      localStorage.removeItem('loggedIn')
       router.replace({ name: 'Login' })
     }
     const handleAddressClick = () => {
@@ -69,13 +79,15 @@ export default {
   top: 0;
   bottom: .5rem;
   right: 0;
-  background: $content-bg-color;
+  background: #f5f5f7;
 }
 .header {
   position: relative;
   height: 1.5rem;
-  background-image: linear-gradient(239deg, #3A6FF3 0%, #50C7FB 100%);
+  background-image: linear-gradient(239deg, #ff3366 0%, #577399 100%);
   padding-top: .4rem;
+  color: $content-font-color;
+  font-family: $content-font;
   &__info {
     margin: .3rem .18rem 0 .18rem;
     padding-top: .46rem;
@@ -107,9 +119,10 @@ export default {
 }
 .list {
   margin: .16rem .18rem 0 .18rem;
-  background: $content-bg-color;
+  background: #FFF;
   box-shadow: 0 .08rem .16rem 0 rgba(0, 0, 0, .08);
   border-radius: .08rem;
+  font-family: $content-font;
   &__item {
     display: flex;
     padding: .2rem;
@@ -120,7 +133,7 @@ export default {
       margin-right: .12rem;
       width: .22rem;
       height: .22rem;
-      background: #32C5FF;
+      background: $content-highlight-color;
       border-radius: .08rem;
       text-align: center;
       font-weight: bold;
@@ -141,6 +154,7 @@ export default {
   margin: .18rem;
   line-height: .32rem;
   background: $content-highlight-color;
+  font-family: $content-font;
   color: $content-bg-color;
   text-align: center;
   border-radius: .04rem;
