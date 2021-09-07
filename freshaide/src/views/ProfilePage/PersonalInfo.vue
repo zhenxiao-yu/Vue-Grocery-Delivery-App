@@ -1,30 +1,40 @@
 <template>
   <div class="wrapper">
-    <div class="header">
-      <div class="header__info">
-        <div class="header__info__user">{{userInfo.username}}</div>
-        <div class="header__info__id">ID:{{userInfo.id}}</div>
+    <div class="index">
+      <div class="index__info">
+        <div class="index__info__user">{{profile.username}}</div>
+        <div class="index__info__id">User ID:{{profile.id}}</div>
       </div>
       <img
-        class="header__avatar"
+        class="index__avatar"
         src="https://loanalexa.com/wp-content/uploads/2016/12/testimonial1.png"
       />
     </div>
     <div class="list">
       <div class="list__item" @click="handleAddressClick">
-        <div class="list__item__icon iconfont">&#xe617;</div>
-        <div class="list__item__test">My Address</div>
-        <div class="list__item__arrow iconfont">&#xe6f2;</div>
+        <div class="list__item__icon iconfont">&#xe758;</div>
+        <div class="list__item__label">My Address</div>
+        <div class="list__item__arrow iconfont">&#xe743;</div>
       </div>
       <div class="list__item" @click="handleAddressClick">
-        <div class="list__item__icon iconfont">&#xe617;</div>
-        <div class="list__item__test">Help Center</div>
-        <div class="list__item__arrow iconfont">&#xe6f2;</div>
+        <div class="list__item__icon iconfont">&#xe76c;</div>
+        <div class="list__item__label">Settings</div>
+        <div class="list__item__arrow iconfont">&#xe743;</div>
       </div>
       <div class="list__item" @click="handleAddressClick">
-        <div class="list__item__icon iconfont">&#xe617;</div>
-        <div class="list__item__test">My Wallet</div>
-        <div class="list__item__arrow iconfont">&#xe6f2;</div>
+        <div class="list__item__icon iconfont">&#xe770;</div>
+        <div class="list__item__label">My Wallet</div>
+        <div class="list__item__arrow iconfont">&#xe743;</div>
+      </div>
+      <div class="list__item" @click="handleAddressClick">
+        <div class="list__item__icon iconfont">&#xe6f9;</div>
+        <div class="list__item__label">Gifts & Coupons</div>
+        <div class="list__item__arrow iconfont">&#xe743;</div>
+      </div>
+      <div class="list__item" @click="handleAddressClick">
+        <div class="list__item__icon iconfont">&#xe752;</div>
+        <div class="list__item__label">Help</div>
+        <div class="list__item__arrow iconfont">&#xe743;</div>
       </div>
     </div>
     <div class="logout" @click="handleLogout">Logout</div>
@@ -38,34 +48,36 @@ import { useRouter } from 'vue-router'
 import { get } from '../../utils/req'
 import Dock from '../HomePage/Dock.vue'
 
+// get user information from API
 const useUserEffect = () => {
-  const userInfo = reactive({ id: '', username: '' })
+  const profile = reactive({ id: '', username: '' })
   const getUserInfo = async () => {
     const result = await get('/api/user/info')
     if (result?.errno === 0 && result?.data) {
       const { id, username } = result.data
-      userInfo.id = id || ''
-      userInfo.username = username || ''
+      profile.id = id || ''
+      profile.username = username || ''
     }
   }
   getUserInfo()
-  return userInfo
+  return profile
 }
 
 export default {
   name: 'PersonalInfo',
   components: { Dock },
   setup () {
-    const router = useRouter()
+    const myRouter = useRouter()
     const handleLogout = () => {
       localStorage.removeItem('loggedIn')
-      router.replace({ name: 'Login' })
+      myRouter.replace({ name: 'Login' })
     }
+    // redirect to address list page
     const handleAddressClick = () => {
-      router.push({ name: 'MyAddressList' })
+      myRouter.push({ name: 'MyAddressList' })
     }
-    const userInfo = useUserEffect()
-    return { handleLogout, handleAddressClick, userInfo }
+    const profile = useUserEffect()
+    return { handleLogout, handleAddressClick, profile }
   }
 }
 </script>
@@ -81,7 +93,7 @@ export default {
   right: 0;
   background: #f5f5f7;
 }
-.header {
+.index {
   position: relative;
   height: 1.5rem;
   background-image: linear-gradient(239deg, #ff3366 0%, #577399 100%);
@@ -133,13 +145,13 @@ export default {
       margin-right: .12rem;
       width: .22rem;
       height: .22rem;
-      background: $content-highlight-color;
+      background: $content-light-color;
       border-radius: .08rem;
       text-align: center;
       font-weight: bold;
-      color: $content-bg-color;
+      color: $content-font-color;
     }
-    &__test {
+    &__label {
       flex: 1;
     }
     &__arrow {
