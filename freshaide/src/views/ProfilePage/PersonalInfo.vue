@@ -16,22 +16,22 @@
         <div class="list__item__label">My Address</div>
         <div class="list__item__arrow iconfont">&#xe743;</div>
       </div>
-      <div class="list__item" @click="handleAddressClick">
+      <div class="list__item" @click="handleDevClick">
         <div class="list__item__icon iconfont">&#xe76c;</div>
         <div class="list__item__label">Settings</div>
         <div class="list__item__arrow iconfont">&#xe743;</div>
       </div>
-      <div class="list__item" @click="handleAddressClick">
+      <div class="list__item" @click="handleDevClick">
         <div class="list__item__icon iconfont">&#xe770;</div>
         <div class="list__item__label">My Wallet</div>
         <div class="list__item__arrow iconfont">&#xe743;</div>
       </div>
-      <div class="list__item" @click="handleAddressClick">
+      <div class="list__item" @click="handleDevClick">
         <div class="list__item__icon iconfont">&#xe6f9;</div>
         <div class="list__item__label">Gifts & Coupons</div>
         <div class="list__item__arrow iconfont">&#xe743;</div>
       </div>
-      <div class="list__item" @click="handleAddressClick">
+      <div class="list__item" @click="handleDevClick">
         <div class="list__item__icon iconfont">&#xe752;</div>
         <div class="list__item__label">Help</div>
         <div class="list__item__arrow iconfont">&#xe743;</div>
@@ -76,8 +76,12 @@ export default {
     const handleAddressClick = () => {
       myRouter.push({ name: 'MyAddressList' })
     }
+    // in development features
+    const handleDevClick = () => {
+      myRouter.push({ name: 'Home' })
+    }
     const profile = useUserEffect()
-    return { handleLogout, handleAddressClick, profile }
+    return { handleLogout, handleAddressClick, handleDevClick, profile }
   }
 }
 </script>
@@ -108,7 +112,7 @@ export default {
     border-radius: .08rem;
     &__user {
       font-size: .24rem;
-      color: #262628;
+      color: #545463;
       text-align: center;
       line-height: .36rem;
     }

@@ -1,5 +1,5 @@
 import { useStore } from 'vuex'
-import { get } from '../utils/request'
+import { get } from '../utils/req'
 
 const useCommonAddressEffect = () => {
   const store = useStore()

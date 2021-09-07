@@ -22,6 +22,10 @@ const routes = [
     name: 'PersonalInfo',
     component: () => import('../views/ProfilePage/PersonalInfo')
   }, {
+    path: '/myAddressList',
+    name: 'MyAddressList',
+    component: () => import('../views/AddressListPage/MyAddressList')
+  }, {
     path: '/login',
     name: 'Login',
     component: () => import('../views/LoginPage/Login'),

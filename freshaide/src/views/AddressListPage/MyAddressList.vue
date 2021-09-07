@@ -4,15 +4,15 @@
       <div
         class="iconfont title__back"
         @click="handleBackClick"
-      >&#xe6f2;</div>
+      >&#xe743;</div>
       <div class="title__text">Manage Address</div>
       <div class="title__add" @click="handleAddClick">New</div>
     </div>
     <Address
       v-for="address in addressList"
-      :key="address._id"
+      :key="address.id"
       :address="address"
-      @click="() => handleUpdateClick(address._id)"
+      @click="() => handleUpdateClick(address.id)"
     />
   </div>
 </template>
@@ -34,7 +34,9 @@ export default {
     const { addressList } = toRefs(store.state)
     const { getAddressList } = useCommonAddressEffect()
     getAddressList(true)
+    // return to the previous page
     const handleBackClick = () => { router.back() }
+    // redirect to add new address page
     const handleAddClick = () => { router.push({ name: 'UpsertAddress' }) }
     const handleUpdateClick = (addressId) => { router.push(`/upsertAddress/${addressId}`) }
     return { addressList, handleBackClick, handleAddClick, handleUpdateClick }
@@ -43,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../style/viriables.scss';
+@import '../../style/variables.scss';
 .wrapper {
   overflow-y: auto;
   position: absolute;
@@ -51,14 +53,14 @@ export default {
   top: 0;
   bottom: 0;
   right: 0;
-  background: $dark-bgColor;
+  background: $content-light-color;
 }
 .title {
   display: flex;
   line-height: .44rem;
-  background: $bgColor;
+  background: $content-bg-color;
   font-size: .16rem;
-  color: $content-fontcolor;
+  color: $content-font-color;
   text-align: center;
   &__back {
     width: .2rem;
