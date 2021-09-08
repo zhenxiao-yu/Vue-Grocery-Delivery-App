@@ -7,6 +7,7 @@ const useCommonAddressEffect = () => {
   const getAddressList = async (forceUpdate) => {
     const addressList = store.state.addressList
     if (forceUpdate || !addressList.length) {
+      // get address from backend
       const result = await get('/api/user/address')
       if (result?.data?.length) {
         store.commit('changeAddressList', result.data)
