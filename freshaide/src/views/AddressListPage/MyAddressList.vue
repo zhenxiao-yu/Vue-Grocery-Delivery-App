@@ -38,7 +38,7 @@ export default {
     const handleBackClick = () => { router.back() }
     // redirect to add new address page
     const handleAddClick = () => { router.push({ name: 'AddAddress' }) }
-    const handleUpdateClick = (addressId) => { router.push(`/upsertAddress/${addressId}`) }
+    const handleUpdateClick = (addressId) => { router.push(`/AddAddress/${addressId}`) }
     return { addressList, handleBackClick, handleAddClick, handleUpdateClick }
   }
 }

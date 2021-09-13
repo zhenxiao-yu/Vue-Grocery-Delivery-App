@@ -39,7 +39,7 @@
 import { toRefs, reactive } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
-import { post, get, patch } from '../../utils/request'
+import { post, get, patch } from '../../utils/req'
 import useCommonAddressEffect from '../../effects/addressEffect'
 
 const useAddressEffect = () => {
@@ -58,7 +58,7 @@ const useFormEffect = (addressId) => {
   const getAddressItem = async () => {
     const result = await get(`/api/user/address/${addressId}`)
     if (result?.errno === 0 && result?.data) {
-      const { city, department, houseNumber, name, phone } = result.data;
+      const { city, department, houseNumber, name, phone } = result.data
       formData.city = city
       formData.department = department
       formData.houseNumber = houseNumber
@@ -67,7 +67,7 @@ const useFormEffect = (addressId) => {
     }
   }
   const upsertAddress = async () => {
-    if(addressId) {
+    if (addressId) {
       const result = await patch(`/api/user/address/${addressId}`, {
         data: formData
       })
@@ -98,7 +98,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../style/viriables.scss';
+@import '../../style/variables.scss';
 .wrapper {
   overflow-y: auto;
   position: absolute;
@@ -106,20 +106,20 @@ export default {
   top: 0;
   bottom: 0;
   right: 0;
-  background: $dark-bgColor;
+  background: $content-bg-color;
 }
 .title {
   display: flex;
   line-height: .44rem;
-  background: $bgColor;
+  background: $content-bg-color;
   font-size: .16rem;
-  color: $content-fontcolor;
+  color: $content-font-color;
   text-align: center;
   &__back {
     width: .2rem;
     margin-left: .18rem;
     font-size: .2rem;
-    color: $search-fontColor;
+    color: $content-font-color;
   }
   &__text {
     flex: 1;
@@ -133,21 +133,21 @@ export default {
 .form {
   padding: 0 .2rem;
   margin-top: .12rem;
-  background: $bgColor;
-  border-top: .01rem solid $content-bgColor;
-  border-bottom: .01rem solid $content-bgColor;
+  background: $content-light-color;
+  border-top: .01rem solid $content-bg-color;
+  border-bottom: .01rem solid $content-bg-color;
   &__item {
     display: flex;
     padding: .12rem 0;
     line-height: .2rem;
     font-size: .14rem;
-    border-bottom: .01rem solid $content-bgColor;
+    border-bottom: .01rem solid $content-bg-color;
     &:last-of-type {
       border-bottom: none;
     }
     &__label {
       margin-right: .05rem;
-      color: $medium-fontColor;
+      color: $content-font-color;
     }
     &__content {
       flex: 1;

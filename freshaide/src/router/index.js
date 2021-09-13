@@ -28,7 +28,7 @@ const routes = [
   }, {
     path: '/add/:id?',
     name: 'UpsertAddress',
-    component: () => import(/* webpackChunkName: "upsertAddress" */ '../views/upsertAddress/UpsertAddress'),
+    component: () => import('../views/AddressFormPage/AddAddress')
   }, {
     path: '/login',
     name: 'Login',

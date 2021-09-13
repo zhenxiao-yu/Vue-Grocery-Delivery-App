@@ -22,10 +22,10 @@ export default {
 @import '../style/variables.scss';
 .address {
   position: relative;
-  margin: .16rem .18rem 0 .18rem;
-  padding: .18rem .64rem .18rem .16rem;
+  margin: 0.16rem 0.18rem 0 0.18rem;
+  padding: 0.18rem 0.64rem 0.18rem 0.16rem;
   background: #FFF;
-  border-radius: .04rem;
+  border-radius: 0.04rem;
   &__info {
     display: flex;
     line-height: .2rem;
