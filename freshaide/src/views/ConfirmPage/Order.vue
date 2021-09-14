@@ -1,10 +1,11 @@
 <template>
     <div class="order">
         <div class="order__total-price">Order Total: <b> &#36;{{myCalculator.price}} </b> </div>
-        <div class="order__btn">Confirm</div>
+        <div class="order__btn" @click="() => handleConfirmClick(true)">Confirm</div>
     </div>
-    <div class="overlay">
-        <div class="overlay__window">
+    <div class="overlay" v-show="showConfirm" @click="() => handleConfirmClick(false)">
+        <!-- @click.stop to prevent handleConfirmClick from executing when window is clicked -->
+        <div class="overlay__window" @click.stop>
             <h3 class="overlay__window__title">Ready to Pay?</h3>
             <p class="overlay__window__tip">Click 'Yes' to pay, else the current order will be canceled</p>
             <div class="overlay__window__btns">
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { post } from '../../utils/req'
@@ -33,9 +35,14 @@ export default {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
+
+    const showConfirm = ref(false)
     const storeId = parseInt(route.params.id, 10)
     const { myCalculator, storeName, productList } = useCommonCartEffect(storeId)
-
+    // show window
+    const handleConfirmClick = (bool) => {
+      showConfirm.value = bool
+    }
     const handlePayClick = async (isCanceled) => {
       const products = []
       for (const i in productList.value) {
@@ -60,7 +67,7 @@ export default {
         // displayToast('Request Failed')
       }
     }
-    return { myCalculator, handlePayClick }
+    return { myCalculator, handlePayClick, handleConfirmClick, showConfirm }
   }
 }
 </script>
