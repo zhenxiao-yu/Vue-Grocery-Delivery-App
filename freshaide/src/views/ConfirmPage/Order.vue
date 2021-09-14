@@ -8,8 +8,14 @@
             <h3 class="overlay__window__title">Ready for checkout?</h3>
             <p class="overlay__window__tip">You will be redirected to a new page.</p>
             <div class="overlay__window__btns">
-                <div class="overlay__window__btn overlay__window__btn--cancel">Cancel</div>
-                <div class="overlay__window__btn overlay__window__btn--confirm">Pay Now</div>
+                <div
+                    class="overlay__window__btn overlay__window__btn--cancel"
+                    @click="handleCancelClick"
+                    >Cancel</div>
+                <div
+                    class="overlay__window__btn overlay__window__btn--confirm"
+                    @click="handlePayClick"
+                    >Pay Now</div>
             </div>
         </div>
     </div>
@@ -25,7 +31,13 @@ export default {
     const route = useRoute()
     const storeId = route.params.id
     const { myCalculator } = useCommonCartEffect(storeId)
-    return { myCalculator }
+    const handleCancelClick = () => {
+      alert('cancel')
+    }
+    const handlePayClick = () => {
+      alert('confirm')
+    }
+    return { myCalculator, handleCancelClick, handlePayClick }
   }
 }
 </script>
