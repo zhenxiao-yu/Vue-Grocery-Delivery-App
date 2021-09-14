@@ -29,44 +29,55 @@ import { useStore } from 'vuex'
 import { post } from '../../utils/req'
 import { useCommonCartEffect } from '../../effects/cartEffects'
 
+// confirm order related logic
+const useConfirmOrderEffect = (storeId, storeName, productList) => {
+  const router = useRouter()
+  const store = useStore()
+  const handlePayClick = async (isCanceled) => {
+    const products = []
+    for (const i in productList.value) {
+      const product = productList.value[i]
+      products.push({ id: parseInt(product.id, 10), amount: product.count })
+    }
+    try {
+      const returnData = await post('/api/order', {
+        addressId: 1,
+        storeId,
+        storeName: storeName.value,
+        isCanceled,
+        products
+      })
+      if (returnData?.errno === 0) {
+        // success
+        store.commit('clearCartData', storeId)
+        router.push({ name: 'OrderList' })
+      }
+    } catch (e) {
+      // show failed
+      // displayToast('Request Failed')
+    }
+  }
+  return { handlePayClick }
+}
+
+// overlay display related logic
+const userOverlayEffect = () => {
+  const showConfirm = ref(false)
+  // show window
+  const handleConfirmClick = (bool) => {
+    showConfirm.value = bool
+  }
+  return { showConfirm, handleConfirmClick }
+}
+
 export default {
   name: 'Order',
   setup () {
     const route = useRoute()
-    const router = useRouter()
-    const store = useStore()
-
-    const showConfirm = ref(false)
     const storeId = parseInt(route.params.id, 10)
     const { myCalculator, storeName, productList } = useCommonCartEffect(storeId)
-    // show window
-    const handleConfirmClick = (bool) => {
-      showConfirm.value = bool
-    }
-    const handlePayClick = async (isCanceled) => {
-      const products = []
-      for (const i in productList.value) {
-        const product = productList.value[i]
-        products.push({ id: parseInt(product.id, 10), amount: product.count })
-      }
-      try {
-        const returnData = await post('/api/order', {
-          addressId: 1,
-          storeId,
-          storeName: storeName.value,
-          isCanceled,
-          products
-        })
-        if (returnData?.errno === 0) {
-        // success
-          store.commit('clearCartData', storeId)
-          router.push({ name: 'Home' })
-        }
-      } catch (e) {
-        // show failed
-        // displayToast('Request Failed')
-      }
-    }
+    const { handlePayClick } = useConfirmOrderEffect(storeId, storeName, productList)
+    const { showConfirm, handleConfirmClick } = userOverlayEffect()
     return { myCalculator, handlePayClick, handleConfirmClick, showConfirm }
   }
 }

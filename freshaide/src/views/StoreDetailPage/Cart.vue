@@ -50,7 +50,7 @@
       <div class="checkout__info">
         Total：<span class="checkout__info__price">&#36; {{myCalculator.price}}</span>
       </div>
-      <div class="checkout__btn">
+      <div class="checkout__btn" v-show="myCalculator.total > 0 ">
         <router-link :to="{path: `/orderConfirmation/${storeId}`}">
         Checkout
         </router-link>

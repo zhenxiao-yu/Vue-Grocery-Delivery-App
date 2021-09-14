@@ -18,6 +18,10 @@ const routes = [
     name: 'OrderConfirmation',
     component: () => import('../views/ConfirmPage/OrderConfirmation')
   }, {
+    path: '/orderList',
+    name: 'OrderList',
+    component: () => import('../views/OrderListPage/OrderList')
+  }, {
     path: '/me',
     name: 'PersonalInfo',
     component: () => import('../views/ProfilePage/PersonalInfo')
