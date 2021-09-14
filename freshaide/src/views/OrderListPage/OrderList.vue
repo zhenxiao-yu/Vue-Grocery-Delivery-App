@@ -10,7 +10,7 @@
         <div class="order__title">
           {{item.storeName}}
           <span class="order__status">
-            {{item.isCanceled ? 'Order Canceled' : 'Order Accepted'}}
+            {{item.isCanceled ? 'Canceled' : 'Processing'}}
           </span>
         </div>
         <div class="order__content">
@@ -42,7 +42,7 @@ import { reactive, toRefs } from 'vue'
 import { get } from '../../utils/req'
 import Dock from '../../views/HomePage/Dock.vue'
 
-// handle orderlist logic
+// handle orderlist trelated logic
 const useOrderListEffect = () => {
   const data = reactive({ list: [] })
   const getNearbyList = async () => {
@@ -57,7 +57,7 @@ const useOrderListEffect = () => {
           totalNumber += (productItem?.orderSales || 0)
           totalPrice += ((productItem?.product?.price * productItem?.orderSales) || 0)
         })
-        order.totalPrice = totalPrice
+        order.totalPrice = totalPrice.toFixed(2)
         order.totalNumber = totalNumber
       })
       data.list = result.data
@@ -87,19 +87,21 @@ export default {
   top: 0;
   bottom: .5rem;
   right: 0;
-  background: $content-light-color;
+  background: $content-bg-color;
 }
 .title {
   line-height: .44rem;
-  background: $content-bg-color;
+  background: $content-highlight-color;
   font-size: .16rem;
-  color: $content-font-color;
+  color: $content-bg-color;
+  font-family: $content-font;
   text-align: center;
 }
 .order {
   margin: .16rem .18rem;
   padding: .16rem;
-  background: $content-bg-color;
+  font-family: $content-font;
+  background: #FFF;
   &__title {
     margin-bottom: .16rem;
     line-height: .22rem;
@@ -109,7 +111,7 @@ export default {
   &__status {
     float: right;
     font-size: .14rem;
-    color: $content-light-color;
+    color: rgba(0, 0, 0, 0.35);
   }
   &__content {
     display: flex;

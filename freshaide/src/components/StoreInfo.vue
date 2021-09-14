@@ -11,7 +11,7 @@
         </div>
         <div class="store__content__tags">
           <span class="store__content__tag">{{item.distance}} km away </span>
-          <span class="store__content__tag">Google Rating: {{item.rating}} Stars</span>
+          <span class="store__content__tag">Rating: {{item.rating}} Stars</span>
         </div>
         <p class="store__content__vip">{{item.vip}}</p>
       </div>
