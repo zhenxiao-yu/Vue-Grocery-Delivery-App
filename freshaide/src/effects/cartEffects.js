@@ -9,8 +9,16 @@ export const useCommonCartEffect = (storeId) => {
   }
   // list of product in the shopping cart
   const productList = computed(() => {
-    const productList = cartList[storeId]?.productList || []
-    return productList
+    const productList = cartList[storeId]?.productList || {}
+    // list of items that are not empty
+    const notZeroProductList = {}
+    for (const i in productList) {
+      const product = productList[i]
+      if (product.count > 0) {
+        notZeroProductList[i] = product
+      }
+    }
+    return notZeroProductList
   })
 
   const storeName = computed(() => {

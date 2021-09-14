@@ -5,17 +5,17 @@
     </div>
     <div class="overlay">
         <div class="overlay__window">
-            <h3 class="overlay__window__title">Ready for checkout?</h3>
-            <p class="overlay__window__tip">You will be redirected to a new page.</p>
+            <h3 class="overlay__window__title">Ready to Pay?</h3>
+            <p class="overlay__window__tip">Click 'Yes' to pay, else the current order will be canceled</p>
             <div class="overlay__window__btns">
                 <div
                     class="overlay__window__btn overlay__window__btn--cancel"
                     @click="() => handlePayClick(true)"
-                    >Cancel</div>
+                    >No</div>
                 <div
                     class="overlay__window__btn overlay__window__btn--confirm"
                     @click="() => handlePayClick(false)"
-                    >Pay Now</div>
+                    >Yes</div>
             </div>
         </div>
     </div>

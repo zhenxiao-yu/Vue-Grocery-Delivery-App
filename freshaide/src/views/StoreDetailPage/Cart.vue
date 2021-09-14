@@ -15,12 +15,7 @@
           <span class="product__controller__clear__area" @click ="() => clearCart(storeId)">Clear</span>
         </div>
       </div>
-      <template
-        v-for="item in productList"
-        :key="item.id"
-      >
-      <!-- hide cart if product amount is 0 -->
-        <div class="product__item" v-if="item.count > 0">
+        <div class="product__item" v-for="item in productList" :key="item.id">
           <div
             class="product__item__select iconfont"
             v-html="item.select ? '&#xe78d;':'&#xe767;'"
@@ -46,7 +41,6 @@
             >+</span>
           </div>
         </div>
-      </template>
     </div>
     <div class="checkout">
       <div class="checkout__icon">
