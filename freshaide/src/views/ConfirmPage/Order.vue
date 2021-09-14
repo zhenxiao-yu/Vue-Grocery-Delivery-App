@@ -10,11 +10,11 @@
             <div class="overlay__window__btns">
                 <div
                     class="overlay__window__btn overlay__window__btn--cancel"
-                    @click="handleCancelClick"
+                    @click="() => handlePayClick(true)"
                     >Cancel</div>
                 <div
                     class="overlay__window__btn overlay__window__btn--confirm"
-                    @click="handlePayClick"
+                    @click="() => handlePayClick(false)"
                     >Pay Now</div>
             </div>
         </div>
@@ -22,22 +22,45 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+import { post } from '../../utils/req'
 import { useCommonCartEffect } from '../../effects/cartEffects'
 
 export default {
   name: 'Order',
   setup () {
     const route = useRoute()
-    const storeId = route.params.id
-    const { myCalculator } = useCommonCartEffect(storeId)
-    const handleCancelClick = () => {
-      alert('cancel')
+    const router = useRouter()
+    const store = useStore()
+    const storeId = parseInt(route.params.id, 10)
+    const { myCalculator, storeName, productList } = useCommonCartEffect(storeId)
+
+    const handlePayClick = async (isCanceled) => {
+      const products = []
+      for (const i in productList.value) {
+        const product = productList.value[i]
+        products.push({ id: parseInt(product.id, 10), amount: product.count })
+      }
+      try {
+        const returnData = await post('/api/order', {
+          addressId: 1,
+          storeId,
+          storeName: storeName.value,
+          isCanceled,
+          products
+        })
+        if (returnData?.errno === 0) {
+        // success
+          store.commit('clearCartData', storeId)
+          router.push({ name: 'Home' })
+        }
+      } catch (e) {
+        // show failed
+        // displayToast('Request Failed')
+      }
     }
-    const handlePayClick = () => {
-      alert('confirm')
-    }
-    return { myCalculator, handleCancelClick, handlePayClick }
+    return { myCalculator, handlePayClick }
   }
 }
 </script>
