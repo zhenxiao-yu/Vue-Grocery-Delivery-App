@@ -9,30 +9,46 @@
       </div>
       <div class="delivery__profile">
         <div class="delivery__profile__title">Delivery Information</div>
-        <div class="delivery__profile__address">400 Eastcastle Pl</div>
-        <div class="delivery__profile__info">
-          <span class="delivery__profile__info__name">ZhenXiao (Mark) Yu</span>
-          <span class="delivery__profile__info__name">(306)581-5556</span>
+        <div v-if="address" @click="handleAddressClick">
+          <div class="delivery__profile__address">
+            {{address.city}}{{address.department}}{{address.houseNumber}}
+          </div>
+          <div class="delivery__profile__info">
+            <span class="delivery__profile__info__name">{{address.name}}</span>
+            <span class="delivery__profile__info__name">{{address.phone}}</span>
+          </div>
+          <div class="iconfont delivery__profile__icon">&#xe743;</div>
         </div>
-        <div class="iconfont delivery__profile__icon">&#xe743;</div>
+        <div v-else>
+          <div class="top__receiver__address">
+           No Available Address
+          </div>
+        </div>
       </div>
     </div>
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import useAddressEffect from './addressEffect'
+
 export default {
   name: 'HeaderArea',
   setup () {
     const myRouter = useRouter()
+    const myRoute = useRoute()
+    const storeId = myRoute.params.id
     const handleReturnClick = () => { myRouter.back() }
-    return { handleReturnClick }
+    const handleAddressClick = () => { myRouter.push(`/ChooseAddressPage/${storeId}`) }
+    const address = useAddressEffect()
+    return { handleReturnClick, handleAddressClick, address }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "../../style/variables.scss";
+@import '../../style/mixins.scss';
 
 .delivery {
   position: relative;
