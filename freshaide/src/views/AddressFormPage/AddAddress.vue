@@ -3,7 +3,7 @@
     <div class="title">
       <div
         class="iconfont title__back"
-        @click="handleBackClick"
+        @click="handleReturnClick"
       >&#xe6f2;</div>
       <div class="title__text">
         {{addressId ? 'Edit Address': 'New Address'}}
@@ -66,7 +66,7 @@ const useFormEffect = (addressId) => {
       formData.phone = phone
     }
   }
-  const upsertAddress = async () => {
+  const addAddress = async () => {
     if (addressId) {
       const result = await patch(`/api/user/address/${addressId}`, {
         data: formData
@@ -80,7 +80,7 @@ const useFormEffect = (addressId) => {
     }
   }
   if (addressId) { getAddressItem() }
-  return { formData, upsertAddress }
+  return { formData, addAddress }
 }
 
 export default {
@@ -90,9 +90,9 @@ export default {
     const route = useRoute()
     const addressId = route?.params?.id
     const { addressList } = useAddressEffect()
-    const { formData, upsertAddress } = useFormEffect(addressId)
-    const handleBackClick = () => { router.back() }
-    return { addressId, addressList, formData, handleBackClick, upsertAddress }
+    const { formData, addAddress } = useFormEffect(addressId)
+    const handleReturnClick = () => { router.back() }
+    return { addressId, addressList, formData, handleReturnClick, addAddress }
   }
 }
 </script>
