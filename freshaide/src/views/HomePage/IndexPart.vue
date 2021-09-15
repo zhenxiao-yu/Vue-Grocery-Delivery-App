@@ -35,7 +35,7 @@ export default {
   name: 'IndexPart',
   setup () {
     const categoryList = [
-      { icon: require('../../images/Snacks.png'), label: 'Sancks' },
+      { icon: require('../../images/Snacks.png'), label: 'Snacks' },
       { icon: require('../../images/Pantry.png'), label: 'Pantry' },
       { icon: require('../../images/Meat.png'), label: 'Meat' },
       { icon: require('../../images/Study.png'), label: 'School Supplies' },

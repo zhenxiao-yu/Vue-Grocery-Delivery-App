@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="container">
     <div class="title">My Orders</div>
     <div class="orders">
       <div
@@ -9,26 +9,26 @@
       >
         <div class="order__title">
           {{item.storeName}}
-          <span class="order__status">
-            {{item.isCanceled ? 'Canceled' : 'Processing'}}
+          <span class="order__order-status">
+            {{item.isCanceled ? 'Order Canceled' : 'Processing'}}
           </span>
         </div>
-        <div class="order__content">
-          <div class="order__content__imgs">
+        <div class="order__card">
+          <div class="order__card__item-images">
             <template
               v-for="(innerItem, innerIndex) in item.products"
               :key="innerIndex"
             >
               <img
-                class="order__content__img"
+                class="order__card__img"
                 :src="innerItem.product.img"
                 v-if="innerIndex <= 3"
               />
             </template>
           </div>
-          <div class="order__content__info">
-            <div class="order__content__price">&#36; {{item.totalPrice}}</div>
-            <div class="order__content__count">Total {{item.totalNumber}} Items</div>
+          <div class="order__card__summary">
+            <div class="order__card__price">&#36;{{item.totalCost}}</div>
+            <div class="order__card__count">Total {{item.itemCount}} Items</div>
           </div>
         </div>
       </div>
@@ -45,25 +45,25 @@ import Dock from '../../views/HomePage/Dock.vue'
 // handle orderlist trelated logic
 const useOrderListEffect = () => {
   const data = reactive({ list: [] })
-  const getNearbyList = async () => {
-    const result = await get('/api/order')
-    if (result?.errno === 0 && result?.data?.length) {
-      const orderList = result.data
+  const getClosebyList = async () => {
+    const returnData = await get('/api/order')
+    if (returnData?.errno === 0 && returnData?.data?.length) {
+      const orderList = returnData.data
       orderList.forEach((order) => {
         const products = order.products || []
-        let totalPrice = 0
-        let totalNumber = 0
+        let totalCost = 0
+        let itemCount = 0
         products.forEach((productItem) => {
-          totalNumber += (productItem?.orderSales || 0)
-          totalPrice += ((productItem?.product?.price * productItem?.orderSales) || 0)
+          itemCount += (productItem?.orderSales || 0)
+          totalCost += ((productItem?.product?.price * productItem?.orderSales) || 0)
         })
-        order.totalPrice = totalPrice.toFixed(2)
-        order.totalNumber = totalNumber
+        order.totalCost = totalCost.toFixed(2)
+        order.itemCount = itemCount
       })
-      data.list = result.data
+      data.list = returnData.data
     }
   }
-  getNearbyList()
+  getClosebyList()
   const { list } = toRefs(data)
   return { list }
 }
@@ -80,7 +80,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../style/variables.scss';
-.wrapper {
+.container {
   overflow-y: auto;
   position: absolute;
   left: 0;
@@ -108,14 +108,14 @@ export default {
     font-size: .16rem;
     color: $content-font-color;
   }
-  &__status {
+  &__order-status {
     float: right;
-    font-size: .14rem;
+    font-size: .12rem;
     color: rgba(0, 0, 0, 0.35);
   }
-  &__content {
+  &__card {
     display: flex;
-    &__imgs {
+    &__item-images {
       flex: 1;
     }
     &__img {
@@ -123,7 +123,7 @@ export default {
       height: .4rem;
       margin-right: .12rem;
     }
-    &__info {
+    &__summary {
       width: .7rem;
     }
     &__price {
@@ -134,8 +134,9 @@ export default {
       text-align: right;
     }
     &__count {
+      display: block;
       line-height: .14rem;
-      font-size: .12rem;
+      font-size: .10rem;
       color: $content-font-color;
       text-align: right;
     }
