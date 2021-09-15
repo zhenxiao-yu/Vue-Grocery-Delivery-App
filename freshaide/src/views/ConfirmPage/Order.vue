@@ -20,6 +20,7 @@
             </div>
         </div>
     </div>
+    <Toast v-if="showMessage" :content="messageContent"/>
 </template>
 
 <script>
@@ -28,9 +29,10 @@ import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { post } from '../../utils/req'
 import { useCommonCartEffect } from '../../effects/cartEffects'
+import Toast, { useToastEffect } from '../../components/Toast'
 
 // confirm order related logic
-const useConfirmOrderEffect = (storeId, storeName, productList) => {
+const useConfirmOrderEffect = (storeId, storeName, productList, displayToast) => {
   const router = useRouter()
   const store = useStore()
   const handlePayClick = async (isCanceled) => {
@@ -54,7 +56,7 @@ const useConfirmOrderEffect = (storeId, storeName, productList) => {
       }
     } catch (e) {
       // show failed
-      // displayToast('Request Failed')
+      displayToast('Checkout Failed')
     }
   }
   return { handlePayClick }
@@ -72,13 +74,15 @@ const userOverlayEffect = () => {
 
 export default {
   name: 'Order',
+  components: { Toast },
   setup () {
     const route = useRoute()
     const storeId = parseInt(route.params.id, 10)
+    const { showMessage, messageContent, displayToast } = useToastEffect()
     const { myCalculator, storeName, productList } = useCommonCartEffect(storeId)
     const { handlePayClick } = useConfirmOrderEffect(storeId, storeName, productList)
     const { showConfirm, handleConfirmClick } = userOverlayEffect()
-    return { myCalculator, handlePayClick, handleConfirmClick, showConfirm }
+    return { myCalculator, handlePayClick, handleConfirmClick, showConfirm, showMessage, messageContent, displayToast }
   }
 }
 </script>
