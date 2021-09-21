@@ -45,6 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// import css files
 @import '../../style/variables.scss';
 .wrapper {
   overflow-y: auto;
